@@ -1,11 +1,11 @@
 <?php
 @session_start();
 
-@include ('./inc/sql.php');
-@include ('../inc/sql.php');
+@include ('./inc/DataBaseConnection.php.php');
+@include ('../inc/DataBaseConnection.php.php');
 @include ('./inc/functions.php');
 @include ('../inc/functions.php');
-@include ('../../inc/sql.php');
+@include ('../../inc/DataBaseConnection.php.php');
 @include ('../../inc/functions.php');
 require_once 'inc/DatabaseConnection.php';
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../DatabaseConnection.php'; // Assurez-vous d'avoir inclus le fichier contenant la classe de connexion à la base de données
+require_once '../DatabaseConnection.php';
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = htmlspecialchars($_POST['email']);
@@ -16,8 +16,13 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $row = $check->rowCount();
     if ($row == 1) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['user'] = $data['email'];
-            header('Location: ../../accueil.php');
+            // Vérifier si le mot de passe correspond au hash stocké dans la base de données
+            if (password_verify($password, $data['password'])) {
+                $_SESSION['user'] = $data['email'];
+                header('Location: ../../accueil.php');
+            } else {
+                header('Location: ../../index.php?login_err=password');
+            }
         } else {
             header('Location: ../../index.php?login_err=email');
         }
@@ -27,4 +32,3 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 } else {
     header('Location: ../../index.php?login_err=champs');
 }
-?>

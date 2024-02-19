@@ -1,5 +1,5 @@
 ﻿<?php
-include("./inc/sql.php"); 
+include("./inc/DataBaseConnection.php"); 
 
 function connected_only()
 {
