@@ -7,11 +7,17 @@
 @include ('../inc/functions.php');
 @include ('../../inc/sql.php');
 @include ('../../inc/functions.php');
+require_once 'inc/DatabaseConnection.php';
 
-if (isset($_SESSION['user']))
-{
+if (isset($_SESSION['user'])) {
     $email = $_SESSION['user'];
-    $sql = $bdd->query("SELECT * FROM users WHERE email= '$email' LIMIT 1");
+    
+    // Connexion à la base de données
+    $database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
+    $bdd = $database->connect();
+
+    $sql = $bdd->prepare("SELECT * FROM users WHERE email= :email LIMIT 1");
+    $sql->execute(array(':email' => $email));
     $user = $sql->fetch(PDO::FETCH_ASSOC);
 
     $prenomnom = $user['prenom'] . " " . $user['nom'];
@@ -22,10 +28,7 @@ if (isset($_SESSION['user']))
 }
 
 // Date du jour en PHP
-$month = date('m');
-$day = date('d');
-$year = date('Y');
-$today = $year . '-' . $month . '-' . $day;
+$today = date('Y-m-d');
 
 setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 
