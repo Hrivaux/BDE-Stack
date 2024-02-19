@@ -1,6 +1,19 @@
 <?php
 @session_start();
 require('global.php');
+require_once 'inc/DataBaseConnection.php'; // Assurez-vous d'avoir inclus le fichier contenant la classe de connexion à la base de données
+
+
+$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
+$statement = $bdd->prepare($sql);
+
+// Exécution de la requête
+$statement->execute();
+
+// Récupération des résultats
+$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 connected_only();
 
@@ -143,14 +156,14 @@ include('templates/meta.php');
                             </div>
                            
 
-
+<!--
                             <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
-                            <?php echo $prenomnom ?>
+                            <?php //echo $prenomnom ?>
                                 <div class="card-body p-0">
                                     <a href="#" class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create Post</a>
                                 </div>
                                 <div class="card-body p-0 mt-3 position-relative">
-                                    <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="<?php echo $user['imageprofil'];?>" alt="image" class="shadow-sm rounded-circle w30"></figure>
+                                    <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="<?php //echo $user['imageprofil'];?>" alt="image" class="shadow-sm rounded-circle w30"></figure>
                                     <textarea name="message" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
                                 </div>
                                 <div class="card-body d-flex p-0 mt-0">
@@ -615,19 +628,22 @@ include('templates/meta.php');
                                     <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
                                 </div>
                             </div>
+-->
 
+                            <?php foreach($publications as $publication){  ?>
                             <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                                 <div class="card-body p-0 d-flex">
                                     <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Anthony Daugloi <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['pseudo'];  ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $publication['date_publication'];  ?></span></h4>
                                     <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                 </div>
                                 <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus <a href="#" class="fw-600 text-primary ms-2">See more</a></p>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['libelle_publication'];  ?></h4>
+                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2"><?php echo $publication['description']; ?></p>
                                 </div>
                                 <div class="card-body d-block p-0 mb-3">
                                     <div class="row ps-2 pe-2">
-                                        <div class="col-sm-12 p-1"><a href="https://via.placeholder.com/615x350.png" data-lightbox="roadtr"><img src="https://via.placeholder.com/615x350.png" class="rounded-3 w-100" alt="image"></a></div>                                        
+                                        <div class="col-sm-12 p-1"><img src="<?php echo htmlspecialchars($publication['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
                                     </div>
                                 </div>
                                 <div class="card-body d-flex p-0">
@@ -649,7 +665,9 @@ include('templates/meta.php');
                                 </div>
                             </div>
  
+                            <?php } ?>
 
+<!--
                             <div class="card w-100 text-center shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="snippet mt-2 ms-auto me-auto" data-title=".dot-typing">
                                     <div class="stage">
@@ -791,6 +809,7 @@ include('templates/meta.php');
                 
             </div>            
         </div>
+-->
         <!-- main content -->
 
         <!-- right chat -->
