@@ -8,7 +8,7 @@
                             <li><a href="accueil.php" class="nav-content-bttn open-font" ><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                             <li><a href="default-badge.php" class="nav-content-bttn open-font" ><i class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Badges</span></a></li>
                             <li><a href="default-storie.php" class="nav-content-bttn open-font" ><i class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Explore Stories</span></a></li>
-                            <li><a href="default-group.php" class="nav-content-bttn open-font" ><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Popular Groups</span></a></li>
+                            <li><a href="evenements.php" class="nav-content-bttn open-font" ><i class="feather-list btn-round-md bg-mini-gradiant me-3"></i><span>Nos événements</span></a></li>
                             <li><a href="user-page.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Author Profile </span></a></li>                        
                         </ul>
                     </div>

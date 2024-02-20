@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/feather.css">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico?1">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.ico">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style.css?1"> 
 
