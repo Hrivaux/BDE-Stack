@@ -1,4 +1,9 @@
+<?php 
+require_once 'inc/upload_handler.php';
+require_once 'inc/ImageUploader.php';
 
+
+?>
 
 <body class="color-theme-blue mont-font">
 
@@ -138,7 +143,7 @@
 
 
                             
-                           <form action="acceuil.php" method="post" enctype="multipart/form-data">
+                           <form action="inc/upload_handler.php" method="post" enctype="multipart/form-data">
 
                             <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
                             <?php echo $prenomnom ?>
@@ -147,22 +152,24 @@
                                     <button type="submit" class="font-xssss fw-600 text-grey-500 p-0 d-flex align-items-center bg-transparent border-0">
                                         <i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create Post
                                     </button>
+                                    <br>
+                                    <input name="libelle_publication" class="rounded font-xssss text-black fw-500 border-light-md theme-dark-bg" type="text" placeholder="Titre"></input>
                                 </div>
+                                
                                 <div class="card-body p-0 mt-3 position-relative">
                                     
                                     <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w30"></figure>
-
-                                    <textarea name="message" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="Description"></textarea>
+                                    
+                                    <textarea name="description" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="Description"></textarea>
                                 </div>
                                 <div class="card-body d-flex p-0 mt-0">
-                                    <!--
-                                    <a href="#" class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i class="font-md text-danger feather-video me-2"></i><span class="d-none-xs">Live Video</span></a> -->
-                                    
+                                   
                                     <label class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4" style="cursor: pointer;">
-                                    <input type="file" name="fileToUpload" id="fileToUpload" style="display:none;">
+                                    <input type="file" name="fileToUpload" id="fileToUpload" required style="display:none;">
                                     <i class="font-md text-success feather-image me-2"></i>
                                     <span>Photo</span>
-                                    </label>                           
+                                    </label>   
+                                    <img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none; max-width: 50%; max-height: auto; object-fit: cover; border-radius: 10px; margin-top: 10px;">                        
                                 </div>
                             </div>
                             </form>
@@ -604,17 +611,17 @@
                                 </div>
                             </div>
 -->
-<?php
+                                <?php
 
 
-$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
-$statement = $bdd->prepare($sql);
+                                $sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
+                                $statement = $bdd->prepare($sql);
 
-$statement->execute();
-        
-$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                $statement->execute();
+                                        
+                                $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-?>
+                                ?>
                             <?php foreach($publications as $publication){  ?>
                             <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                                 <div class="card-body p-0 d-flex">
@@ -628,7 +635,7 @@ $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <div class="card-body d-block p-0 mb-3">
                                     <div class="row ps-2 pe-2">
-                                        <div class="col-sm-12 p-1"><img src="<?php echo htmlspecialchars($publication['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
+                                        <div class="col-sm-12 p-1"><img src="<?php echo 'inc/'. htmlspecialchars($publication['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
                                     </div>
                                 </div>
                                 <div class="card-body d-flex p-0">
@@ -649,6 +656,7 @@ $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
                                 </div>
                             </div>
+                            <br>
  
                             <?php } ?>
 
@@ -919,7 +927,7 @@ $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="js/lightbox.js"></script>
     <script src="js/scripts.js"></script>
-
+    <script src="js/imagePreview.js"></script>                          
     
 </body>
 

@@ -8,43 +8,38 @@ class ImageUploader {
     private $uploadedFilePath;
 
     public function upload($file) {
-        $this->imageFileType = strtolower(pathinfo(basename($file["name"]), PATHINFO_EXTENSION));
-        $this->uploadedFilePath = $this->targetDir . basename($file["name"]);
+        // Générer un nom de fichier unique pour éviter les conflits
+        $this->imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+        $tempName = uniqid('img_', true) . '.' . $this->imageFileType;
+        $this->uploadedFilePath = $this->targetDir . $tempName;
 
         // Vérifier si le fichier est une image réelle
         if (!$this->isImage($file["tmp_name"])) {
             $this->uploadOk = false;
         }
 
-        // Vérifier si le fichier existe déjà
-        if (file_exists($this->uploadedFilePath)) {
-            $this->errorMsg .= "Désolé, le fichier existe déjà. ";
-            $this->uploadOk = false;
-        }
-
         // Vérifier la taille du fichier
-        if ($file["size"] > 500000) {
-            $this->errorMsg .= "Désolé, votre fichier est trop volumineux.";
+        if ($file["size"] > 5000000) { // 500KB, ajustez selon vos besoins
+            $this->errorMsg .= "Désolé, votre fichier est trop volumineux. ";
             $this->uploadOk = false;
         }
 
         // Autoriser certains formats de fichier
-        if ($this->imageFileType != "jpg" && $this->imageFileType != "png" && $this->imageFileType != "jpeg" && $this->imageFileType != "gif") {
+        if (!in_array($this->imageFileType, ['jpg', 'png', 'jpeg', 'gif'])) {
             $this->errorMsg .= "Désolé, seuls les fichiers JPG, JPEG, PNG & GIF sont autorisés. ";
             $this->uploadOk = false;
         }
 
-        // Vérifier si $uploadOk est défini sur false à cause d'une erreur
-        if (!$this->uploadOk) {
-            $this->errorMsg .= "Désolé, votre fichier n'a pas été téléchargé. ";
-            return false;
-        } else {
+        if ($this->uploadOk) {
             if (move_uploaded_file($file["tmp_name"], $this->uploadedFilePath)) {
                 return true;
             } else {
                 $this->errorMsg .= "Désolé, une erreur s'est produite lors du téléchargement de votre fichier. ";
                 return false;
             }
+        } else {
+            $this->errorMsg .= "Désolé, votre fichier n'a pas été téléchargé. ";
+            return false;
         }
     }
 
@@ -58,6 +53,17 @@ class ImageUploader {
         }
     }
 
+    public function saveImageInfo($db, $description) {
+        if ($this->uploadOk) {
+            $stmt = $db->prepare("INSERT INTO publications (description, chemin_image, date_publication) VALUES (:description, :chemin, NOW())");
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':chemin', $this->uploadedFilePath);
+            $stmt->execute();
+        } else {
+            echo "Erreur lors de l'enregistrement dans la base de données : " . $this->getErrorMsg();
+        }
+    }
+
     public function getErrorMsg() {
         return $this->errorMsg;
     }
@@ -66,6 +72,5 @@ class ImageUploader {
         return $this->uploadedFilePath;
     }
 }
-
 
 ?>
