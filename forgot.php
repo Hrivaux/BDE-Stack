@@ -1,12 +1,3 @@
-<?php
-@session_start();
-require('global.php');
-
-connected_only();
-
-include('templates/meta.php');
-?>
-
 <body class="color-theme-blue">
 
     <div class="preloader"></div>

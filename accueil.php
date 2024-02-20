@@ -616,7 +616,7 @@ $sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON 
 $statement = $bdd->prepare($sql);
 
 $statement->execute();
-
+        
 $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
