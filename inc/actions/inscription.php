@@ -1,5 +1,4 @@
 <?php
-
 require_once('../DataBaseConnection.php');
 
 class InscriptionManager {
@@ -29,27 +28,26 @@ class InscriptionManager {
             return;
         }
 
+        // Générer le jeton unique
+        $token = bin2hex(random_bytes(32));
+
         if (!empty($nom) && !empty($prenom) && !empty($email) && !empty($password) && !empty($pseudo)) {
-            $reponse = $this->bdd->prepare("INSERT INTO users(nom, prenom, email, password, pseudo, date_inscription, id_grade) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $reponse = $this->bdd->prepare("INSERT INTO users(nom, prenom, email, password, pseudo, date_inscription, id_grade, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $reponse->execute([$nom, $prenom, $email, $pass_hash, $pseudo, $date_inscription, $id_grade]);
+            $reponse->execute([$nom, $prenom, $email, $pass_hash, $pseudo, $date_inscription, $id_grade, $token]);
 
-            Header('location: ../../accueil.php?action=success');
+            // Envoyer l'e-mail de confirmation à l'utilisateur
+            $sujet = "Confirmation d'inscription";
+            $message = "Bonjour $nom,\n\nMerci de cliquer sur le lien suivant pour confirmer votre inscription : http://hugo-rivaux.fr/BDEStack/inc/actions/valider.php?token=$token";
+            $entete = "From: votreadresse@example.com\r\n";
+
+            if (mail($email, $sujet, $message, $entete)) {
+                Header('location: ../../accueil.php?action=success');
+            } else {
+                Header('location: ../../register.php?inscription=email');
+            }
         } else {
             Header('location: ../../register.php?inscription=erreur');
         }
     }
 }
-
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$password2 = $_POST['password2'];
-$pseudo = $_POST['pseudo'];
-
-$database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
-$bdd = $database->connect();
-
-$inscriptionManager = new InscriptionManager($bdd);
-$inscriptionManager->inscription($nom, $prenom, $email, $password, $password2, $pseudo);
