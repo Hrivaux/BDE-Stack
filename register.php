@@ -1,8 +1,9 @@
 <?php
-require('global.php');
+@session_start();
+include ("inc/functions.php");
 
-include('templates/meta.php');
-?>
+already_connected();
+include ("templates/meta.php")?>
 
 <body class="color-theme-blue">
 
