@@ -1,9 +1,4 @@
-<?php
-// Compteur nombre de publication 
-$nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
-$data = $nbpubli->fetch();
-$nb_publicationducompte = $data['nb'];
-?>
+
 
 <body class="color-theme-blue mont-font">
 
@@ -14,9 +9,13 @@ $nb_publicationducompte = $data['nb'];
 
         <!-- navigation top-->
         <?php include('templates/header.php'); ?>
-        <!-- navigation top -->
 
-        <!-- navigation left -->
+        <?php
+// Compteur nombre de publication 
+$nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
+$data = $nbpubli->fetch();
+$nb_publicationducompte = $data['nb'];
+?>
 
          <?php include('templates/menu.php'); ?>
         <!-- main content -->
@@ -33,7 +32,7 @@ $nb_publicationducompte = $data['nb'];
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
                                 <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url(https://via.placeholder.com/960x250.png);"></div>
                                 <div class="card-body d-block pt-4 text-center position-relative">
-                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="https://via.placeholder.com/100x100.png" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="<?php echo $profilconnecte['photo_profil']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
                                     <h4 class="font-xs ls-1 fw-700 text-grey-900"><?php echo $prenomnom ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $profilconnecte['pseudo']; ?></span></h4>
                                     
@@ -127,14 +126,14 @@ $nb_publicationducompte = $data['nb'];
                                     <a href="#" class="fw-600 ms-auto font-xssss text-primary">Voir tout</a>
                                 </div>
                                 <?php
-$requete = $bdd->prepare("SELECT * FROM evenement LIMIT 3");
+$requete = $bdd->prepare("SELECT * FROM evenements LIMIT 3");
 $requete->execute();
 $reqev = $requete->fetch();
 
 if ($reqev !== false) {?>
                                 <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                     <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600"><?php echo $reqev['date'];?></h4></div>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2"><?php echo $reqev['nom'];?><span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500"><?php echo $reqev['adresse'];?></span> </h4>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2"><?php echo $reqev['libelle_evenement'];?><span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500"><?php echo $reqev['adresse'];?></span> </h4>
                                 </div><?php
 }
 else
