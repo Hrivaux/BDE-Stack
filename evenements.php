@@ -40,21 +40,22 @@
                                                     evenements
                                                 ORDER BY 
                                                     date DESC";
-                            
                                     $reqart = $bdd->prepare($requete);
                                     $reqart->execute();
-                                    
                                     $resultat = $reqart->fetchAll();
-                                    
+
                                     if (!empty($resultat)) {
                                         foreach ($resultat as $evenement) {
                                             $id_evenement = $evenement['id'];
-                                            $requete_inscription = "SELECT * FROM inscriptions_evenements WHERE id_evenement = ? AND id_user = $id_encours AND actif = 1";
+                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ?";
                                             $req_inscription = $bdd->prepare($requete_inscription);
                                             $req_inscription->execute([$id_evenement]);
-                                            $inscription = $req_inscription->fetch();
+                                            $nb_participants = $req_inscription->fetchColumn();
                                         
-                                            $inscrit = $inscription ? true : false;
+                                            $inscrit = $nb_participants > 0;
+                                        
+                                            // Déterminez le texte approprié en fonction du nombre de participants
+                                            $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
                                 ?>
                                             <div class="col-md-6 col-sm-6 pe-2 ps-2">
                                                 <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
@@ -65,8 +66,10 @@
                                                         </figure>
                                                         <div class="clearfix"></div>
                                                         <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?></h4>
-                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?></p>
-                                                    
+                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0"><?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?></p>
+                                                        <br>
+                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $participants_text; ?></p>
+
                                                         <span class="position-absolute right-15 top-0 d-flex align-items-center">
                                                             <?php if ($inscrit): ?>
                                                                 <a href="" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
