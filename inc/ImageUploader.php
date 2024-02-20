@@ -1,7 +1,7 @@
 <?php
 
 class ImageUploader {
-    private $targetDir = "../images/uploads/publication";
+    private $targetDir = "../images/uploads/publication/";
     private $imageFileType;
     private $uploadOk = true;
     private $errorMsg = "";
