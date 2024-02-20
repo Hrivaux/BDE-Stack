@@ -1,11 +1,4 @@
 <?php
-@session_start();
-require('global.php');
-
-connected_only();
-
-include('templates/meta.php');
-
 // Compteur nombre de publication 
 $nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
 $data = $nbpubli->fetch();

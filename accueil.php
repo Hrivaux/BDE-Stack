@@ -1,24 +1,4 @@
-<?php
-@session_start();
-require('global.php');
-require_once 'inc/DataBaseConnection.php'; // Assurez-vous d'avoir inclus le fichier contenant la classe de connexion à la base de données
 
-
-$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
-$statement = $bdd->prepare($sql);
-
-// Exécution de la requête
-$statement->execute();
-
-// Récupération des résultats
-$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-connected_only();
-
-include('templates/meta.php');
-?>
 
 <body class="color-theme-blue mont-font">
 
@@ -37,6 +17,21 @@ include('templates/meta.php');
 
         <!-- navigation left -->
         <!-- main content -->
+
+
+        <?php
+
+
+
+$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
+$statement = $bdd->prepare($sql);
+
+// Exécution de la requête
+$statement->execute();
+
+// Récupération des résultats
+$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
+?>
         <div class="main-content right-chat-active">
             
             <div class="middle-sidebar-bottom">

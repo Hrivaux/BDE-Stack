@@ -1,3 +1,12 @@
+<?php
+@session_start();
+require('global.php');
+
+connected_only();
+
+include('templates/meta.php');
+?>
+
 <div class="nav-header bg-white shadow-xs border-0">
             <div class="nav-top">
                 <a href="accueil.php"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">69 La Trik </span> </a>
@@ -23,11 +32,26 @@
             <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
                 
                 <h4 class="fw-700 font-xss mb-4">Notification</h4>
+
+                                <?php
+$requete = $bdd->prepare("SELECT * FROM evenement LIMIT 3");
+$requete->execute();
+$reqnot = $requete->fetch();
+
+if ($reqnot !== false) {?>
+
                 <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
                     <img src="https://via.placeholder.com/50x50.png" alt="user" class="w40 position-absolute left-0">
                     <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Hendrix Stamp <span class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 3 min</span></h5>
                     <h6 class="text-grey-500 fw-500 font-xssss lh-4">There are many variations of pass..</h6>
                 </div>
+                <?php
+                }
+else
+{
+   echo "Il n'y a pas d'évènement à venir";
+}
+?>
                 <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
                     <img src="https://via.placeholder.com/50x50.png" alt="user" class="w40 position-absolute left-0">
                     <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Goria Coast <span class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 2 min</span></h5>
