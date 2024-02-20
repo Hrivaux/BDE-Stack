@@ -30,16 +30,16 @@
                             <div class="row ps-2 pe-1">
                                 <?php
                                     $requete = "SELECT 
-                                                    E.id, 
-                                                    E.libelle_evenement,
-                                                    E.photo_couverture,
-                                                    E.photo,
-                                                    E.adresse,
-                                                    E.ville
+                                                    id,
+                                                    libelle_evenement,
+                                                    photo_couverture,
+                                                    photo,
+                                                    adresse,
+                                                    ville
                                                 FROM 
-                                                    evenements AS E
+                                                    evenements
                                                 ORDER BY 
-                                                    E.date DESC";
+                                                    date DESC";
                             
                                     $reqart = $bdd->prepare($requete);
                                     $reqart->execute();
@@ -69,9 +69,9 @@
                                                     
                                                         <span class="position-absolute right-15 top-0 d-flex align-items-center">
                                                             <?php if ($inscrit): ?>
-                                                                <a href="#" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue">✅ INSCRIT</a>
+                                                                <a href="" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
                                                             <?php else: ?>
-                                                                <a href="#" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white">S'INSCRIRE</a>
+                                                                <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
                                                             <?php endif; ?>
                                                         </span>
                                                     </div>
@@ -256,7 +256,52 @@
             </div>
         </div>
 
-        
+        <!-- Modal Inscription -->
+        <div id="modal-popup-inscription" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Inscription réussie !</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Vous êtes désormais inscrit à l'événement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                        
+        <!-- Modal Erreur -->
+        <div id="modal-popup-erreur" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Erreur d'inscription</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Une erreur est survenue lors de l'inscription.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                    
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const inscription = params.get('inscription');
+                                    
+            if (inscription === 'inscrit') {
+                $('#modal-popup-inscription').modal('show');
+            } else if (inscription === 'erreur') {
+                $('#modal-popup-erreur').modal('show');
+            }
+        </script>
+
+
         <!-- right chat -->
         
         <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
@@ -285,9 +330,9 @@
 
     
 
-    <div class="modal-popup-chat">
-        <div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
-            <div class="modal-popup-header w-100 border-bottom">
+    <div class="custom-modal-popup-chat">
+        <div class="custom-modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
+            <div class="custom-modal-popup-header w-100 border-bottom">
                 <div class="card p-3 d-block border-0 d-block">
                     <figure class="avatar mb-0 float-left me-2">
                         <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35 me-1">
@@ -297,21 +342,20 @@
                     <a href="#" class="font-xssss position-absolute right-0 top-0 mt-3 me-4"><i class="ti-close text-grey-900 mt-2 d-inline-block"></i></a>
                 </div>
             </div>
-            <div class="modal-popup-body w-100 p-3 h-auto">
+            <div class="custom-modal-popup-body w-100 p-3 h-auto">
                 <div class="message"><div class="message-content font-xssss lh-24 fw-500">Hi, how can I help you?</div></div>
                 <div class="date-break font-xsssss lh-24 fw-500 text-grey-500 mt-2 mb-2">Mon 10:20am</div>
                 <div class="message self text-right mt-2"><div class="message-content font-xssss lh-24 fw-500">I want those files for you. I want you to send 1 PDF and 1 image file.</div></div>
                 <div class="snippet pt-3 ps-4 pb-2 pe-3 mt-2 bg-grey rounded-xl float-right" data-title=".dot-typing"><div class="stage"><div class="dot-typing"></div></div></div>
                 <div class="clearfix"></div>
             </div>
-            <div class="modal-popup-footer w-100 border-top">
+            <div class="custom-modal-popup-footer w-100 border-top">
                 <div class="card p-3 d-block border-0 d-block">
                     <div class="form-group icon-right-input style1-input mb-0"><input type="text" placeholder="Start typing.." class="form-control rounded-xl bg-greylight border-0 font-xssss fw-500 ps-3"><i class="feather-send text-grey-500 font-md"></i></div>
                 </div>
             </div>
         </div> 
     </div>
-
 
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
