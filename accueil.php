@@ -17,21 +17,6 @@
 
         <!-- navigation left -->
         <!-- main content -->
-
-
-        <?php
-
-
-
-$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
-$statement = $bdd->prepare($sql);
-
-// Exécution de la requête
-$statement->execute();
-
-// Récupération des résultats
-$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
-?>
         <div class="main-content right-chat-active">
             
             <div class="middle-sidebar-bottom">
@@ -624,7 +609,17 @@ $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
 -->
+<?php
 
+
+$sql = "SELECT publication.*, users.pseudo FROM publication INNER JOIN users ON publication.id_users = users.id";
+$statement = $bdd->prepare($sql);
+
+$statement->execute();
+
+$publications = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+?>
                             <?php foreach($publications as $publication){  ?>
                             <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                                 <div class="card-body p-0 d-flex">
