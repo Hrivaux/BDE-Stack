@@ -10,7 +10,7 @@ class DesinscriptionManager {
     }
 
     public function desinscriptionEvenement($id_evenement, $id_encours) {
-        $requete_update = "UPDATE inscriptions_evenements SET actif = 0 WHERE id_evenement = ? AND id_user = $id_encours";
+        $requete_update = "UPDATE inscriptions_evenements SET actif = 0 WHERE id_evenement = ? AND id_user = ?";
         $req_update = $this->bdd->prepare($requete_update);
         $req_update->execute([$id_evenement, $id_encours]);
     }

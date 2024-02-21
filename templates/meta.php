@@ -39,6 +39,8 @@
             justify-content: center;
             min-height: calc(100vh - 60px);
         }
+        
+        a { text-decoration:none !important; }
 
     </style>
 </head>
