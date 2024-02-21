@@ -2,21 +2,27 @@
 session_start();
 require_once '../DatabaseConnection.php';
 
-// Vérifier si l'utilisateur est connecté en tant qu'administrateur
+// Vérifier si l'utilisateur est connecté et a un email validé
 if (isset($_SESSION['user'])) {
-    // Récupérer le grade de l'utilisateur depuis la base de données
-    $database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
-    $bdd = $database->connect();
-
     $email = $_SESSION['user'];
-    $check_grade = $bdd->prepare('SELECT id_grade FROM users WHERE email = ?');
-    $check_grade->execute(array($email));
-    $grade_data = $check_grade->fetch();
-    $grade_encours = $grade_data['id_grade'];
 
-    // Vérifier si l'utilisateur est administrateur et si le chemin contient "/Administration"
-    if ($grade_encours >= 2 && strpos($_SERVER['REQUEST_URI'], "/administration") !== false) {
-        header('Location: /administration/accueil.php');
+    // Ajout d'une vérification pour le champ 'validate' dans la requête
+    $check_user = $bdd->prepare('SELECT id_grade, validate FROM users WHERE email = ?');
+    $check_user->execute(array($email));
+    $user_data = $check_user->fetch();
+
+    // Vérifier si l'email a été validé
+    if ($user_data['validate'] == 1) {
+        $grade_encours = $user_data['id_grade'];
+
+        // Vérifier si l'utilisateur est administrateur et si le chemin contient "/Administration"
+        if ($grade_encours >= 2 && strpos($_SERVER['REQUEST_URI'], "/administration") !== false) {
+            header('Location: /administration/accueil.php');
+            exit();
+        }
+    } else {
+        // Si l'email n'est pas validé, rediriger l'utilisateur avec un message d'erreur
+        header('Location: ../../index.php?login_err=email_non_valide');
         exit();
     }
 }
@@ -27,23 +33,29 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $password = htmlspecialchars($_POST['password']);
 
     // Connexion à la base de données
-    
 
-    $check = $bdd->prepare('SELECT email, password, prenom FROM users WHERE email = ?');
+    // Ajout d'une vérification pour le champ 'validate' dans la requête
+    $check = $bdd->prepare('SELECT email, password, prenom, validate FROM users WHERE email = ?');
     $check->execute(array($email));
     $data = $check->fetch();
     $row = $check->rowCount();
+
     if ($row == 1) {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // Vérifier si le mot de passe correspond au hash stocké dans la base de données
-            if (password_verify($password, $data['password'])) {
-                $_SESSION['user'] = $data['email'];
-                header('Location: ../../accueil.php');
+        if ($data['validate'] == 1) { // Vérifier si l'email a été validé
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Vérifier si le mot de passe correspond au hash stocké dans la base de données
+                if (password_verify($password, $data['password'])) {
+                    $_SESSION['user'] = $data['email'];
+                    header('Location: ../../accueil.php');
+                } else {
+                    header('Location: ../../index.php?login_err=password');
+                }
             } else {
-                header('Location: ../../index.php?login_err=password');
+                header('Location: ../../index.php?login_err=email');
             }
         } else {
-            header('Location: ../../index.php?login_err=email');
+            // Si l'email n'est pas validé, rediriger l'utilisateur avec un message d'erreur
+            header('Location: ../../index.php?login_err=email_non_valide');
         }
     } else {
         header('Location: ../../index.php?login_err=email');
