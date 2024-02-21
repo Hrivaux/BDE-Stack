@@ -27,8 +27,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $password = htmlspecialchars($_POST['password']);
 
     // Connexion à la base de données
-    $database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
-    $bdd = $database->connect();
+    
 
     $check = $bdd->prepare('SELECT email, password, prenom FROM users WHERE email = ?');
     $check->execute(array($email));

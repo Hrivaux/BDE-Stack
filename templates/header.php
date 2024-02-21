@@ -1,5 +1,6 @@
 <?php
-include('global.php');
+@session_start();
+require('global.php');
 
 connected_only();
 
@@ -8,10 +9,12 @@ include('templates/meta.php');
 class Header
 {
     private $bdd;
+    private $photo_profil; 
 
-    public function __construct($bdd)
+    public function __construct($bdd, $photo_profil)
     {
         $this->bdd = $bdd;
+        $this->photo_profil = $photo_profil; // Initialisation de la propriété $photo_profil
     }
 
     public function generateHeader()
@@ -143,7 +146,7 @@ class Header
                     
                 </div>
             </div>
-            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
+            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="<?php echo $this->photo_profil ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
         </div>
         <?php
     }
@@ -214,9 +217,9 @@ class Header
     }
 }
 
-$header = new Header($bdd);
+$header = new Header($bdd, $photo_profil);
 $header->generateHeader();
-?>
+
 
 
   

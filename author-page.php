@@ -1,9 +1,4 @@
-<?php
-// Compteur nombre de publication 
-$nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
-$data = $nbpubli->fetch();
-$nb_publicationducompte = $data['nb'];
-?>
+
 
 <body class="color-theme-blue mont-font">
 
@@ -14,9 +9,13 @@ $nb_publicationducompte = $data['nb'];
 
         <!-- navigation top-->
         <?php include('templates/header.php'); ?>
-        <!-- navigation top -->
 
-        <!-- navigation left -->
+        <?php
+// Compteur nombre de publication 
+$nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
+$data = $nbpubli->fetch();
+$nb_publicationducompte = $data['nb'];
+?>
 
          <?php include('templates/menu.php'); ?>
         <!-- main content -->
@@ -31,9 +30,9 @@ $nb_publicationducompte = $data['nb'];
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
-                                <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url(https://via.placeholder.com/960x250.png);"></div>
+                                <div class="card-body position-relative h240 bg-image-cover bg-image-center"><img src="<?php echo $profilconnecte['photo_couverture']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></div>
                                 <div class="card-body d-block pt-4 text-center position-relative">
-                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="https://via.placeholder.com/100x100.png" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="<?php echo $profilconnecte['photo_profil']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
                                     <h4 class="font-xs ls-1 fw-700 text-grey-900"><?php echo $prenomnom ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $profilconnecte['pseudo']; ?></span></h4>
                                     
@@ -66,7 +65,7 @@ $nb_publicationducompte = $data['nb'];
                                         </div>
                                     </div>
                                 </div>
-                               <!--                      
+                                                
                                 <div class="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
                                     <ul class="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4" id="pills-tab" role="tablist">
                                         <li class="active list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block active" href="#navtabs1" data-toggle="tab">About</a></li>
@@ -79,7 +78,7 @@ $nb_publicationducompte = $data['nb'];
                                         <li class="list-inline-item ms-auto mt-3 me-4"><a href="#" class=""><i class="ti-more-alt text-grey-500 font-xs"></i></a></li>
                                     </ul>
                                 </div>
--->
+
                             </div>
                         </div>
                         <div class="col-xl-4 col-xxl-3 col-lg-4 pe-0">
@@ -127,14 +126,14 @@ $nb_publicationducompte = $data['nb'];
                                     <a href="#" class="fw-600 ms-auto font-xssss text-primary">Voir tout</a>
                                 </div>
                                 <?php
-$requete = $bdd->prepare("SELECT * FROM evenement LIMIT 3");
+$requete = $bdd->prepare("SELECT * FROM evenements LIMIT 3");
 $requete->execute();
 $reqev = $requete->fetch();
 
 if ($reqev !== false) {?>
                                 <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                     <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600"><?php echo $reqev['date'];?></h4></div>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2"><?php echo $reqev['nom'];?><span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500"><?php echo $reqev['adresse'];?></span> </h4>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2"><?php echo $reqev['libelle_evenement'];?><span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500"><?php echo $reqev['adresse'];?></span> </h4>
                                 </div><?php
 }
 else
@@ -160,7 +159,7 @@ if ($reqpubli !== false) {?>
 
                                                       <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                                    <figure class="avatar me-3"><img src="<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
                                     <a href="#" class="ms-auto" id="dropdownMenu5" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                     <div class="dropdown-menu dropdown-menu-start p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu5">
@@ -184,9 +183,9 @@ if ($reqpubli !== false) {?>
                                 </div>
                                 <div class="card-body p-0 mb-3 rounded-3 overflow-hidden">
                                     <h2 style="text-align: center;"><?php echo $reqpubli['libelle_publication']; ?></h2>
-                                    <a href="#" class="video-btn">
-                                        <img src="https://via.placeholder.com/615x350.png" alt="">
-                                    </a>
+                                    <div class="row ps-2 pe-2">
+                                        <div class="col-sm-12 p-1"><img src="<?php echo ($reqpubli['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
+                                    </div>
                                 </div>
                                 <div class="card-body p-0 me-lg-5">
                                     <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2"><?php echo $reqpubli['description']; ?><a href="#" class="fw-600 text-primary ms-2">See more</a></p>
@@ -216,145 +215,7 @@ else
    echo "Vous n'avez pas de publication";
 }
 ?>
-                            
-                        <!--    
-                            <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
-                                <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Anthony Daugloi <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
-                                    <a href="#" class="ms-auto" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2">
-                                        <div class="card-body p-0 d-flex">
-                                            <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-lock text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-4">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus <a href="#" class="fw-600 text-primary ms-2">See more</a></p>
-                                </div>
-                                <div class="card-body d-flex p-0">
-                                    <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-3"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a>
-                                    <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i>22 Comment</a>
-                                    <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
-                                </div>
-                            </div>
-
-
-
-                            <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
-                                <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Anthony Daugloi <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
-                                    <a href="#" class="ms-auto" id="dropdownMenu5" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-start p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu5">
-                                        <div class="card-body p-0 d-flex">
-                                            <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-lock text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-4">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body p-0 mb-3 rounded-3 overflow-hidden">
-                                    <a href="#" class="video-btn">
-                                        <img src="https://via.placeholder.com/615x350.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus <a href="#" class="fw-600 text-primary ms-2">See more</a></p>
-                                </div>
-                                <div class="card-body d-flex p-0">
-                                    <a href="#" class="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a>
-                                    <div class="emoji-wrap">
-                                        <ul class="emojis list-inline mb-0">
-                                            <li class="emoji list-inline-item"><i class="em em---1"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-angry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-anguished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-astonished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-blush"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-clap"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-cry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-full_moon_with_face"></i></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">22 Comment</span></a>
-                                    <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
-                                </div>
-                            </div>
-
-                            <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
-                                <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Anthony Daugloi <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
-                                    <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                </div>
-
-                                <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus <a href="#" class="fw-600 text-primary ms-2">See more</a></p>
-                                </div>
-                                <div class="card-body d-block p-0 mb-3">
-                                    <div class="row ps-2 pe-2">
-                                        <div class="col-xs-6 col-sm-6 p-1"><a href="https://via.placeholder.com/300x200.png" data-lightbox="roadtri"><img src="https://via.placeholder.com/300x200.png" class="rounded-3 w-100" alt="image"></a></div>
-                                        <div class="col-xs-6 col-sm-6 p-1"><a href="https://via.placeholder.com/300x200.png" data-lightbox="roadtri"><img src="https://via.placeholder.com/300x200.png" class="rounded-3 w-100" alt="image"></a></div>
-                                    </div>
-                                    <div class="row ps-2 pe-2">
-                                        <div class="col-xs-4 col-sm-4 p-1"><a href="https://via.placeholder.com/300x200.png" data-lightbox="roadtri"><img src="https://via.placeholder.com/300x200.png" class="rounded-3 w-100" alt="image"></a></div>
-                                        <div class="col-xs-4 col-sm-4 p-1"><a href="https://via.placeholder.com/300x200.png" data-lightbox="roadtri"><img src="https://via.placeholder.com/300x200.png" class="rounded-3 w-100" alt="image"></a></div>
-                                        <div class="col-xs-4 col-sm-4 p-1"><a href="https://via.placeholder.com/300x200.png" data-lightbox="roadtri" class="position-relative d-block"><img src="https://via.placeholder.com/300x200.png" class="rounded-3 w-100" alt="image"><span class="img-count font-sm text-white ls-3 fw-600"><b>+2</b></span></a></div>
-                                    </div>
-                                </div>
-                                <div class="card-body d-flex p-0">
-                                    <a href="#" class="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a>
-                                    <div class="emoji-wrap">
-                                        <ul class="emojis list-inline mb-0">
-                                            <li class="emoji list-inline-item"><i class="em em---1"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-angry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-anguished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-astonished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-blush"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-clap"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-cry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-full_moon_with_face"></i></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">22 Comment</span></a>
-                                    <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
-                                </div>
-                            </div>
-
-
-                        </div>               
-                    </div>
-                </div>
-                 
-            </div>            
-        </div>-->
-        <!-- main content -->
-
-        <!-- right chat -->
+                        
         <div class="right-chat nav-wrap mt-2 right-scroll-bar">
             <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 
@@ -410,72 +271,8 @@ if (!empty($resultat))
                             </h3>
                             <span class="badge badge-primary text-white badge-pill fw-500 mt-0">2</span>
                         </li>
-                        <!--
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Victor Exrixon</a>
-                            </h3>
-                            <span class="bg-success ms-auto btn-round-xss"></span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Surfiya Zakir</a>
-                            </h3>
-                            <span class="bg-warning ms-auto btn-round-xss"></span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Goria Coast</a>
-                            </h3>
-                            <span class="bg-success ms-auto btn-round-xss"></span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Hurin Seary</a>
-                            </h3>
-                            <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">4:09 pm</span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">David Goria</a>
-                            </h3>
-                            <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 days</span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Seary Victor</a>
-                            </h3>
-                            <span class="bg-success ms-auto btn-round-xss"></span>
-                        </li>
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Ana Seary</a>
-                            </h3>
-                            <span class="bg-success ms-auto btn-round-xss"></span>
-                        </li>
                         
-                    </ul>
+                       
                     <?php
 }
 }

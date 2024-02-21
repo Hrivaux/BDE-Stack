@@ -149,27 +149,27 @@ require_once 'inc/ImageUploader.php';
                             <?php echo $prenomnom ?>
                                 
                                 <div class="card-body p-0">   
-                                    <button type="submit" class="font-xssss fw-600 text-grey-500 p-0 d-flex align-items-center bg-transparent border-0">
-                                        <i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create Post
-                                    </button>
+                                    
                                     <br>
                                     <input name="libelle_publication" class="rounded font-xssss text-black fw-500 border-light-md theme-dark-bg" type="text" placeholder="Titre"></input>
                                 </div>
                                 
                                 <div class="card-body p-0 mt-3 position-relative">
-                                    
-                                    <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w30"></figure>
-                                    
+                                              
                                     <textarea name="description" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="Description"></textarea>
                                 </div>
+                                <br>
                                 <div class="card-body d-flex p-0 mt-0">
                                    
                                     <label class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4" style="cursor: pointer;">
                                     <input type="file" name="fileToUpload" id="fileToUpload" required style="display:none;">
                                     <i class="font-md text-success feather-image me-2"></i>
                                     <span>Photo</span>
-                                    </label>   
-                                    <img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none; max-width: 50%; max-height: auto; object-fit: cover; border-radius: 10px; margin-top: 10px;">                        
+                                    </label>
+                                    <button type="submit" class="font-xssss fw-600 text-grey-500 p-0 d-flex align-items-center bg-transparent border-0">
+                                        <i class="btn-round-sm font-xs text-primary ti-arrow-right me-2 bg-greylight"></i>
+                                    </button>   
+                                    <img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none; max-width: 50%; max-height: auto; object-fit: cover; border-radius: 10px; margin: 25px; ">                        
                                 </div>
                             </div>
                             </form>
@@ -635,7 +635,7 @@ require_once 'inc/ImageUploader.php';
                                 </div>
                                 <div class="card-body d-block p-0 mb-3">
                                     <div class="row ps-2 pe-2">
-                                        <div class="col-sm-12 p-1"><img src="<?php echo 'inc/'. htmlspecialchars($publication['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
+                                        <div class="col-sm-12 p-1"><img src="<?php echo htmlspecialchars($publication['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
                                     </div>
                                 </div>
                                 <div class="card-body d-flex p-0">

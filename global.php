@@ -23,7 +23,8 @@ if (isset($_SESSION['user'])) {
     $prenomnom = $user['prenom'] . " " . $user['nom'];
     $nomprenom = $user['nom'] . " " . $user['prenom'];
     $id_encours = $user['id'];
-    $grade_encours = $user['id_grade'];
+    $photo_profil = $user['photo_profil'];
+   // $grade_encours = $user['grade'];
    // $region_encours = $user['region'];
 }
 
