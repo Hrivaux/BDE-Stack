@@ -594,22 +594,28 @@ require_once 'inc/ImageUploader.php';
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center p-4">
                                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènement que tu as manqué</h4>
-                                    <a href="#" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
+                                    <a href="evenements.php" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
                                 </div>
                                 <?php
                                     $requete = "SELECT 
-                                                    E.id,
-                                                    E.libelle_evenement,
-                                                    E.photo_couverture,
-                                                    E.id_categorie,
-                                                    E.adresse,
-                                                    E.ville,
-                                                    C.libelle as 'catLibelle'
-                                                FROM 
-                                                    evenements E
-                                                    INNER JOIN categories_evenements C ON C.id = E.id_categorie
-                                                ORDER BY 
-                                                    E.date DESC";
+                E.id,
+                E.libelle_evenement,
+                E.photo_couverture,
+                E.id_categorie,
+                E.adresse,
+                E.ville,
+                C.libelle as 'catLibelle'
+            FROM 
+                evenements E
+                INNER JOIN categories_evenements C ON C.id = E.id_categorie
+            WHERE 
+                E.id NOT IN (
+                    SELECT id_evenement
+                    FROM inscriptions_evenements
+                    WHERE id_user = $id_encours AND actif = 1
+                )
+            ORDER BY 
+                E.date DESC";
                                     $reqart = $bdd->prepare($requete);
                                     $reqart->execute();
                                     $resultat = $reqart->fetchAll();
@@ -617,7 +623,7 @@ require_once 'inc/ImageUploader.php';
                                     if (!empty($resultat)) {
                                         foreach ($resultat as $evenement) {
                                             $id_evenement = $evenement['id'];
-                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours";
+                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours and actif = 1";
                                             $req_inscription = $bdd->prepare($requete_inscription);
                                             $req_inscription->execute([$id_evenement]);
                                             $nb_participants = $req_inscription->fetchColumn();
@@ -628,7 +634,8 @@ require_once 'inc/ImageUploader.php';
                                             $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
                                 ?>
                                 <div class="" style="text-align: center;">
-                                    <img src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?> " alt="" style="height: 150px; width: auto;"><br><br><br>
+                                    <img src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?> " alt="" style="height: 150px; width: auto;"><br><br>
+                                    <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $participants_text; ?></p>
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $evenement['libelle_evenement']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $evenement['adresse']; ?></span></h4>
                                 </div>
                                 <div class="card-body d-flex align-items-center pt-0 ps-4 pe-4 pb-4">
