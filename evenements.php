@@ -11,7 +11,6 @@
          <?php include('templates/menu.php'); ?>
         <!-- main content -->
         <div class="main-content right-chat-active">
-            
             <div class="middle-sidebar-bottom">
                 <div class="middle-sidebar-left pe-0">
                     <div class="row">
@@ -38,6 +37,7 @@
                                                     E.id_categorie,
                                                     E.adresse,
                                                     E.ville,
+                                                    E.description,
                                                     C.libelle as 'catLibelle'
                                                 FROM 
                                                     evenements E
@@ -62,8 +62,9 @@
                                             $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
                                 ?>
                                             <div class="col-md-6 col-sm-6 pe-2 ps-2">
-                                                <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
-                                                    <div class="card-body position-relative h100 bg-image-cover bg-image-center" style="background-image: url(images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>); width: 500px; height: 100px;"></div>
+                                                 <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
+                                                    <a data-bs-toggle="modal" href="#Modal_<?php echo $evenement['id']; ?>">
+                                               <div class="card-body position-relative h100 bg-image-cover bg-image-center" style="background-image: url(images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>); width: 500px; height: 100px;"></div>
                                                     <div class="card-body d-block w-100 pe-4 pb-4 pt-0 text-left position-relative">
                                                         <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?></h4>
                                                         <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0"><?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?></p>
@@ -72,7 +73,7 @@
                                                         
                                                         <span class="badge badge-secondary"><?php echo $evenement['catLibelle']; ?></span>
                                                         
-                                                        <span class="position-absolute right-15 top-0 d-flex align-items-center">
+                                                        <span class="position-absolute right-15 top-0 d-flex align-items-center" style="float:right">
                                                             <?php if ($inscrit): ?>
                                                                 <a href="inc/actions/desinscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
                                                             <?php else: ?>
@@ -81,7 +82,47 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                            </a>
                                             </div>
+
+                                            <div class="portfolio-modal modal fade" id="Modal_<?php echo $evenement['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    <div class="modal-body">
+
+                                                                        <h2 class="text-uppercase"><?php echo $evenement['libelle_evenement']; ?></h2>
+                                                                        <img class="img-fluid d-block mx-auto" src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>" alt="<?php echo $evenement['libelle_evenement']; ?>" />
+                                                                        <ul class="list-inline">
+                                                                            <li>
+                                                                                <?php echo $participants_text; ?>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <p><?php echo $evenement['description']; ?></p>
+                                                                        <ul class="list-inline">
+                                                                            <li>
+                                                                                <strong>Catégorie :</strong>
+                                                                                <?php echo $evenement['catLibelle']; ?>
+                                                                            </li>
+                                                                            <li>
+                                                                                <strong>Lieu :</strong>
+                                                                                <?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
+                                                                            type="button">
+                                                                            <i class="fas fa-xmark me-1"></i>
+                                                                            FERMER
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                        </div>
                                 <?php 
                                         }
                                     }
@@ -340,7 +381,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Vous êtes désormais inscrit à l'événement.</p>
+                        <p>Vous êtes désormais inscrit à l'événement.<br>Un mail de confirmation vous a été envoyé.</p>
                     </div>
                 </div>
             </div>
