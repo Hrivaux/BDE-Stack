@@ -25,6 +25,7 @@ if (isset($_SESSION['user'])) {
     $id_encours = $user['id'];
     $photo_profil = '';
     $grade_encours = $user['id_grade'];
+    $photo_couverture = $user['photo_couverture'];
 
 if (isset($user['photo_profil'])) {
     $photo_profil = $user['photo_profil'];

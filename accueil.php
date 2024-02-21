@@ -58,87 +58,7 @@ require_once 'inc/ImageUploader.php';
                         <div class="col-xl-8 col-xxl-9 col-lg-8">
 
 
-                            <div class="card w-100 shadow-none bg-transparent bg-transparent-card border-0 p-0 mb-0">
-                                <div class="owl-carousel category-card owl-theme overflow-hidden nav-none">
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-none rounded-xxxl bg-dark overflow-hidden mb-3 mt-3">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <span class="btn-round-lg bg-white"><i class="feather-plus font-lg"></i></span>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-700 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">Add Story </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">Victor Exrixon </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">Surfiya Zakir </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">David Goria </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">David Goria </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">David Goria </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="card w125 h200 d-block border-0 shadow-xss rounded-xxxl bg-gradiant-bottom overflow-hidden mb-3 mt-3" style="background-image: url(https://via.placeholder.com/200x300.png);">
-                                            <div class="card-body d-block p-3 w-100 position-absolute bottom-0 text-center">
-                                                <a href="#" data-target="#Modalstries" data-toggle="modal">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-1 font-xssss text-white mt-2 mb-1">Seary Victor </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
-                            </div>
+                            
                            
 
 
@@ -673,35 +593,59 @@ require_once 'inc/ImageUploader.php';
                         <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center p-4">
-                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Friend Request</h4>
-                                    <a href="#" class="fw-600 ms-auto font-xssss text-primary">See all</a>
+                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènement que tu as manqué</h4>
+                                    <a href="#" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
                                 </div>
-                                <div class="card-body d-flex pt-4 ps-4 pe-4 pb-0 border-top-xs bor-0">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Anthony Daugloi <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">12 mutual friends</span></h4>
+                                <?php
+                                    $requete = "SELECT 
+                                                    E.id,
+                                                    E.libelle_evenement,
+                                                    E.photo_couverture,
+                                                    E.id_categorie,
+                                                    E.adresse,
+                                                    E.ville,
+                                                    C.libelle as 'catLibelle'
+                                                FROM 
+                                                    evenements E
+                                                    INNER JOIN categories_evenements C ON C.id = E.id_categorie
+                                                ORDER BY 
+                                                    E.date DESC";
+                                    $reqart = $bdd->prepare($requete);
+                                    $reqart->execute();
+                                    $resultat = $reqart->fetchAll();
+
+                                    if (!empty($resultat)) {
+                                        foreach ($resultat as $evenement) {
+                                            $id_evenement = $evenement['id'];
+                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours";
+                                            $req_inscription = $bdd->prepare($requete_inscription);
+                                            $req_inscription->execute([$id_evenement]);
+                                            $nb_participants = $req_inscription->fetchColumn();
+                                        
+                                            $inscrit = $nb_participants > 0;
+                                        
+                                            // Déterminez le texte approprié en fonction du nombre de participants
+                                            $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
+                                ?>
+                                <div class="" style="text-align: center;">
+                                    <img src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?> " alt="" style="height: 150px; width: auto;"><br><br><br>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $evenement['libelle_evenement']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $evenement['adresse']; ?></span></h4>
                                 </div>
                                 <div class="card-body d-flex align-items-center pt-0 ps-4 pe-4 pb-4">
-                                    <a href="#" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">Confirm</a>
-                                    <a href="#" class="p-2 lh-20 w100 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl">Delete</a>
+                                    <?php if ($inscrit): ?>
+                                    <a href="#" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">✅ INSCRIT</a></a>
+                                    <?php else: ?>
+                                    <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">S'INSCRIRE</a>
+                                    <?php endif; ?>
+                                    <a href="evenements.php" class="p-2 lh-20 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl" style="white-space: nowrap;">Voir plus de détails</a>
                                 </div>
 
-                                <div class="card-body d-flex pt-0 ps-4 pe-4 pb-0">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Mohannad Zitoun <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">12 mutual friends</span></h4>
-                                </div>
-                                <div class="card-body d-flex align-items-center pt-0 ps-4 pe-4 pb-4">
-                                    <a href="#" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">Confirm</a>
-                                    <a href="#" class="p-2 lh-20 w100 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl">Delete</a>
-                                </div>
 
-                                <div class="card-body d-flex pt-0 ps-4 pe-4 pb-0">
-                                    <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">Mohannad Zitoun <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">12 mutual friends</span></h4>
-                                </div>
-                                <div class="card-body d-flex align-items-center pt-0 ps-4 pe-4 pb-4">
-                                    <a href="#" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">Confirm</a>
-                                    <a href="#" class="p-2 lh-20 w100 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl">Delete</a>
-                                </div>
+
+<?php 
+                                        }
+                                    }
+                                ?>
                             </div>
                         </div>
 
@@ -710,7 +654,7 @@ require_once 'inc/ImageUploader.php';
                 
             </div>            
         </div>
--->
+
         <!-- main content -->
 
         <!-- right chat -->

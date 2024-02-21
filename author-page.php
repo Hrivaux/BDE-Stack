@@ -39,7 +39,7 @@ $nb_publicationducompte = $data['nb'];
                                         <h4 class="font-xsssss text-center d-none d-lg-block text-grey-500 fw-600 ms-2 me-2"><b class="text-grey-900 mb-1 font-sm fw-700 d-inline-block ls-3 text-dark">32k </b> Follow</h4>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
-                                        <a href="#" class="d-none d-lg-block bg-success p-3 z-index-1 rounded-3 text-white font-xsssss text-uppercase fw-700 ls-3">Add Friend</a>
+                                       <a type="button" class="btn btn-primary mt-5 mb-5" data-bs-toggle="modal" href="#ModalForm"> Modifier mon profil</a>
                                         <a href="#" class="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"><i class="feather-mail font-md"></i></a>
                                         <a href="#" id="dropdownMenu8" class="d-none d-lg-block btn-round-lg ms-2 rounded-3 text-grey-700 bg-greylight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more font-md"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu8">
@@ -99,7 +99,7 @@ $nb_publicationducompte = $data['nb'];
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1">Genarel Group</h4>
                                 </div>
                             </div>
-                            <!--
+                           
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center  p-4">
                                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Photos</h4>
