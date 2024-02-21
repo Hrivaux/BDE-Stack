@@ -23,13 +23,10 @@ if (isset($_SESSION['user'])) {
     $prenomnom = $user['prenom'] . " " . $user['nom'];
     $nomprenom = $user['nom'] . " " . $user['prenom'];
     $id_encours = $user['id'];
-    $photo_profil = '';
+    $photo_profil = $user['photo_profil'];
     $grade_encours = $user['id_grade'];
     $photo_couverture = $user['photo_couverture'];
 
-if (isset($user['photo_profil'])) {
-    $photo_profil = $user['photo_profil'];
-}
    // $region_encours = $user['region'];
 }
 
@@ -38,14 +35,12 @@ $today = date('Y-m-d');
 
 setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 
-connected_only();
-
 include('templates/meta.php');
 
 class Header
 {
     private $bdd;
-    private $photo_profil; 
+    public $photo_profil; 
 
     public function __construct($bdd, $photo_profil)
     {
@@ -182,7 +177,7 @@ class Header
                     
                 </div>
             </div>
-            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="<?php echo $this->photo_profil ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
+            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="<?php echo $this->photo_profil; ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
         </div>
         <?php
     }

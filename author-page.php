@@ -4,17 +4,17 @@
     
     <div class="main-wrapper">
 
-        <!-- navigation top-->
-        <?php include('templates/header.php'); ?>
+    <?php 
+        include('templates/header.php'); 
+        include('templates/menu.php'); 
 
-        <?php
-// Compteur nombre de publication 
-$nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
-$data = $nbpubli->fetch();
-$nb_publicationducompte = $data['nb'];
+        // Compteur nombre de publication 
+        $nbpubli = $bdd->query("SELECT count(*) as nb FROM publication WHERE id_users = $id_encours");
+        $data = $nbpubli->fetch();
+        $nb_publicationducompte = $data['nb'];
+
 ?>
 
-         <?php include('templates/menu.php'); ?>
         <!-- main content -->
         <div class="main-content right-chat-active">
         <?php
@@ -118,7 +118,7 @@ $nb_publicationducompte = $data['nb'];
                                 <div class="card-body d-block w-100 pt-0">
                                     <a href="#" class="p-2 lh-28 w-100 d-block bg-grey text-grey-800 text-center font-xssss fw-700 rounded-xl"><i class="feather-external-link font-xss me-2"></i> More</a>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="portfolio-modal modal fade" id="ModalForm" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -127,7 +127,7 @@ $nb_publicationducompte = $data['nb'];
                                 <div class="col-lg-8">
                                     <div class="modal-body">
                                         <div class="d-flex align-items-center mt-3">
-                                            <h5 class="text-uppercase"><b>Modifier ces informations personelle : </b></h5>
+                                            <h5 class="text-uppercase"><b>Modifier mes informations personnelles : </b></h5>
                                         </div>
                                         <hr>
                                         <form method="post" action="inc/actions/add_event.php" enctype="multipart/form-data">
@@ -290,41 +290,6 @@ else
                         </div>
                     </div>
                 </div>
-                <!-- loader wrapper -->
-                <?php
-$requete = ("SELECT * FROM users ORDER BY id DESC");
-
-$reqfriend = $bdd->prepare($requete);
-$reqfriend->execute();
-
-$resultat = $reqmfriend->fetchAll();
-if (!empty($resultat))
-{
-    foreach ($resultat as $friend)
-    {
-?>
-                <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
-                    <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
-                    <ul class="list-group list-group-flush">
-                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                            <figure class="avatar float-left mb-0 me-2">
-                                <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35">
-                            </figure>
-                            <h3 class="fw-700 mb-0 mt-0">
-                                <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Hurin Seary</a>
-                            </h3>
-                            <span class="badge badge-primary text-white badge-pill fw-500 mt-0">2</span>
-                        </li>
-                        
-                       
-                    <?php
-}
-}
-else
-{
-    echo "Aucun médecin n'a été créé";
-}
-?>
 
                 </div>
                 <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
@@ -440,7 +405,7 @@ else
 
 
     <script src="js/plugin.js"></script>
-        <script src="js/scripts.js"></script>
+    <script src="js/scripts.js"></script>
     <script src="js/lightbox.js"></script>
 
     
