@@ -427,30 +427,66 @@
             </div>
         </div>  
 
+        <div id="modal-popup-desinscritOk" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Désinscription à un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Vous êtes désormais désinscrit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <div id="modal-popup-desinscritNonOk" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Désinscription à un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Une erreur est survenue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
         <script>
             const params = new URLSearchParams(window.location.search);
             const inscription = params.get('inscription');
-                                    
-            if (inscription === 'inscrit') {
-                $('#modal-popup-inscription').modal('show');
-            } else if (inscription === 'erreur') {
-                $('#modal-popup-erreur').modal('show');
-            }
-        </script>     
-
-        <script>
+                if (inscription === 'inscrit') {
+                    $('#modal-popup-inscription').modal('show');
+                } else if (inscription === 'erreur') {
+                    $('#modal-popup-erreur').modal('show');
+                }
+            
             const params2 = new URLSearchParams(window.location.search);
             const addE = params.get('addE');
-                                    
-            if (addE === 'evenementOK') {
-                $('#modal-popup-evenementOK').modal('show');
-            } else if (addE === 'evenementNonOK') {
-                $('#modal-popup-evenementNonOK').modal('show');
-            } else if (addE === 'format') {
-                $('#modal-popup-format').modal('show');
-            } else if (addE === 'existe') {
-                $('#modal-popup-existe').modal('show');
-            }
+                if (addE === 'evenementOK') {
+                    $('#modal-popup-evenementOK').modal('show');
+                } else if (addE === 'evenementNonOK') {
+                    $('#modal-popup-evenementNonOK').modal('show');
+                } else if (addE === 'format') {
+                    $('#modal-popup-format').modal('show');
+                } else if (addE === 'existe') {
+                    $('#modal-popup-existe').modal('show');
+                }
+
+            const params3 = new URLSearchParams(window.location.search);
+            const desinscription = params.get('desinscription');                      
+                if (desinscription === 'desinscritOk') {
+                    $('#modal-popup-desinscritOk').modal('show');
+                } else if (addE === 'desinscritNonOk') {
+                    $('#modal-popup-desinscritNonOk').modal('show');
+                 }
         </script>
 
 

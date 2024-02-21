@@ -10,8 +10,9 @@ if (isset($_GET['id_evenement'])) {
 
     $inscriptionManager = new DesinscriptionManager($bdd);
     $inscriptionManager->desinscriptionEvenement($id_evenement, $id_encours); 
-    header('Location: ../../evenements.php?desinscription=effectuee');
+    header('Location: ../../evenements.php?desinscription=desinscritOk');
     exit();
 } else {
-    echo "Paramètres manquants dans l'URL.";
+    header('Location: ../../evenements.php?desinscription=desinscritNonOk');
+    exit();
 }
