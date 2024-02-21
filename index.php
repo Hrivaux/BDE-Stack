@@ -55,65 +55,24 @@ include ("templates/meta.php")?>
 
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
-    <div class="modal fade" id="password" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="tbmodal">
-			<h3 style="color:white;">Le mot de passe saisi est incorrect.</h3>
-		</div>
-	</div>
-</div>
-<div class="modal fade" id="email" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="tbmodal">
-			<h3 style="color:white;">L'adresse, mail saisie n'existe pas ou est incorrecte.</h3>
-		</div>
-	</div>
-</div>
-<div class="modal fade" id="champs" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="tbmodal">
-			<h3 style="color:white;">Merci de remplir la totalité des champs.</h3>
-		</div>
-	</div>
-</div>
-<?php
-	if(isset($_GET['login_err'])) {
-		$errlogin = htmlspecialchars($_GET['login_err']);
-		
-		switch($errlogin)
-		{
-			case 'password':
-?>
-<script>
-$(document).ready(function(){
-    $("#password").modal('show');
-});
-</script>
-<?php }
-switch($errlogin)
-{
-	case 'email':
-?>
-<script>
-$(document).ready(function(){
-    $("#email").modal('show');
-});
-</script>
-<?php }
-switch($errlogin)
-{
-	case 'champs':
-?>
-<script>
-$(document).ready(function(){
-    $("#champs").modal('show');
-});
-</script>
-<?php break; } } ?>	    
+
+    <div class="modal fade" id="email_non_valide" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="tbmodal">
+                <h3 style="color:white;">Votre adresse email n'est pas confirmée. Veuillez vérifier votre boîte de réception et cliquer sur le lien de confirmation.</h3>
+            </div>
+        </div>
+    </div>
 
 
-
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loginErr = urlParams.get('login_err');
+            if (loginErr === 'email_non_valide') {
+                alert('Votre adresse email n\'est pas confirmée. Veuillez vérifier votre boîte de réception et cliquer sur le lien de confirmation.');
+            }
+        });
+    </script>
 </body>
-
 </html>
