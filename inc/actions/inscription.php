@@ -69,7 +69,7 @@ class InscriptionNow {
                     $mail->Port = 587;
 
                     // Destinataires
-                    $mail->setFrom('majtx69@gmail.com', 'Mailer');
+                    $mail->setFrom('majtx69@gmail.com', 'BDE');
                     $mail->addAddress($email, $nom);
 
                     // Contenu
