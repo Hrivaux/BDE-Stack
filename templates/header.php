@@ -23,12 +23,12 @@ if (isset($_SESSION['user'])) {
     $prenomnom = $user['prenom'] . " " . $user['nom'];
     $nomprenom = $user['nom'] . " " . $user['prenom'];
     $id_encours = $user['id'];
-    $photo_profil = ''; // Initialisation de la variable à une chaîne vide par défaut
+    $photo_profil = '';
+    $grade_encours = $user['id_grade'];
 
 if (isset($user['photo_profil'])) {
     $photo_profil = $user['photo_profil'];
 }
-   // $grade_encours = $user['grade'];
    // $region_encours = $user['region'];
 }
 

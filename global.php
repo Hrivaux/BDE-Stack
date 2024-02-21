@@ -24,8 +24,8 @@ if (isset($_SESSION['user'])) {
     $nomprenom = $user['nom'] . " " . $user['prenom'];
     $id_encours = $user['id'];
     $photo_profil = $user['photo_profil'];
-    $grade_encours = $user['grade'];
-    
+    $grade_encours = $user['id_grade'];
+
    // $region_encours = $user['region'];
 }
 
