@@ -1,9 +1,6 @@
 
 
 <body class="color-theme-blue mont-font">
-
-
-
     
     <div class="main-wrapper">
 
@@ -84,7 +81,8 @@ $nb_publicationducompte = $data['nb'];
                         <div class="col-xl-4 col-xxl-3 col-lg-4 pe-0">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-block p-4">
-                                    <h4 class="fw-700 mb-3 font-xsss text-grey-900">Description<i class="feather-edit-2 text-grey-500 me-3 font-lg"></i></h4>
+                                    <h4 class="fw-700 mb-3 font-xsss text-grey-900">Description <a data-bs-toggle="modal" href="#ModalForm" id="openModal" ><i class="feather-edit-2 text-grey-500 me-3 font-lg"></i></a></h4>
+
                                     
                                     <p class="fw-500 text-grey-500 lh-24 font-xssss mb-0"><?php echo $profilconnecte['status']; ?></p>
                                 </div>
@@ -101,6 +99,7 @@ $nb_publicationducompte = $data['nb'];
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1">Genarel Group</h4>
                                 </div>
                             </div>
+                            <!--
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center  p-4">
                                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Photos</h4>
@@ -119,8 +118,52 @@ $nb_publicationducompte = $data['nb'];
                                 <div class="card-body d-block w-100 pt-0">
                                     <a href="#" class="p-2 lh-28 w-100 d-block bg-grey text-grey-800 text-center font-xssss fw-700 rounded-xl"><i class="feather-external-link font-xss me-2"></i> More</a>
                                 </div>
+                            </div>-->
+                            <div class="portfolio-modal modal fade" id="ModalForm" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="container"><img src="images/removedbg.png" width="80px" style="margin-right: 10px; position: absolute;">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <div class="d-flex align-items-center mt-3">
+                                            <h5 class="text-uppercase"><b>Modifier ces informations personelle : </b></h5>
+                                        </div>
+                                        <hr>
+                                        <form method="post" action="inc/actions/add_event.php" enctype="multipart/form-data">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Insérez un titre" required>
+                                                <label for="titre">Description :</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <textarea class="form-control" id="contenu" name="contenu" placeholder="Insérez le contenu de l'événement" required></textarea>
+                                                <label for="contenu">Ecole :</label>
+                                            </div>
+
+                                             <label for="categorie">Ville :</label>
+                                                 <textarea class="form-control" id="contenu" name="contenu" placeholder="Insérez le contenu de l'événement" required></textarea>
+                                                 <br><br>
+
+                                            <button class="btn btn-success btn-xl text-uppercase" type="submit">PUBLIER</button>
+                                            <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
+                                                <i class="fas fa-xmark me-1"></i> x FERMER
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center  p-4">
                                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
@@ -136,12 +179,12 @@ if ($reqev !== false) {?>
                                     <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600"><?php echo $reqev['date'];?></h4></div>
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-2"><?php echo $reqev['libelle_evenement'];?><span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500"><?php echo $reqev['adresse'];?></span> </h4>
                                 </div><?php
-}
-else
-{
-   echo "Il n'y a pas d'évènement à venir";
-}
-?>
+                    }
+                    else
+                    {
+                    echo "Il n'y a pas d'évènement à venir";
+                    }
+                    ?>
    
                             </div>
 
@@ -151,12 +194,12 @@ else
                           
 
                       
-<?php
-$requete = $bdd->prepare("SELECT * FROM publication WHERE id_users  = $id_encours");
-$requete->execute();
-$reqpubli = $requete->fetch();
+                                    <?php
+                                    $requete = $bdd->prepare("SELECT * FROM publication WHERE id_users  = $id_encours");
+                                    $requete->execute();
+                                    $reqpubli = $requete->fetch();
 
-if ($reqpubli !== false) {?>
+                                    if ($reqpubli !== false) {?>
 
                                                       <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
@@ -397,8 +440,9 @@ else
 
 
     <script src="js/plugin.js"></script>
+        <script src="js/scripts.js"></script>
     <script src="js/lightbox.js"></script>
-    <script src="js/scripts.js"></script>
+
     
 </body>
 
