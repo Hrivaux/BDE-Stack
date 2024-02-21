@@ -1,6 +1,41 @@
 <?php
 @session_start();
-require('global.php');
+
+@include ('./inc/DataBaseConnection.php.php');
+@include ('../inc/DataBaseConnection.php.php');
+@include ('./inc/functions.php');
+@include ('../inc/functions.php');
+@include ('../../inc/DataBaseConnection.php.php');
+@include ('../../inc/functions.php');
+require_once 'inc/DatabaseConnection.php';
+
+if (isset($_SESSION['user'])) {
+    $email = $_SESSION['user'];
+    
+    // Connexion à la base de données
+    $database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
+    $bdd = $database->connect();
+
+    $sql = $bdd->prepare("SELECT * FROM users WHERE email= :email LIMIT 1");
+    $sql->execute(array(':email' => $email));
+    $user = $sql->fetch(PDO::FETCH_ASSOC);
+
+    $prenomnom = $user['prenom'] . " " . $user['nom'];
+    $nomprenom = $user['nom'] . " " . $user['prenom'];
+    $id_encours = $user['id'];
+    $photo_profil = ''; // Initialisation de la variable à une chaîne vide par défaut
+
+if (isset($user['photo_profil'])) {
+    $photo_profil = $user['photo_profil'];
+}
+   // $grade_encours = $user['grade'];
+   // $region_encours = $user['region'];
+}
+
+// Date du jour en PHP
+$today = date('Y-m-d');
+
+setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 
 connected_only();
 
@@ -138,7 +173,7 @@ class Header
                         </div>
                     </div>
                     <div class="card bg-transparent-card border-0 d-block mt-3">
-                        <h4 class="d-inline font-xssss mont-font fw-700"><?php echo $prenomnom; ?> Mode</h4>
+                        <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4>
                         <div class="d-inline float-right mt-1">
                             <label class="toggle toggle-dark"><input type="checkbox"><span class="toggle-icon"></span></label>
                         </div>
