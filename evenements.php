@@ -51,7 +51,7 @@
                                     if (!empty($resultat)) {
                                         foreach ($resultat as $evenement) {
                                             $id_evenement = $evenement['id'];
-                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours";
+                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours and actif = 1";
                                             $req_inscription = $bdd->prepare($requete_inscription);
                                             $req_inscription->execute([$id_evenement]);
                                             $nb_participants = $req_inscription->fetchColumn();
