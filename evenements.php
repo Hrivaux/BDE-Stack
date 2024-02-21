@@ -26,20 +26,24 @@
                                     <a href="#" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>
                                 </div>
                             </div>
-
                             <div class="row ps-2 pe-1">
+                            <?php if (isset($_SESSION['user']) && $grade_encours >= 2): ?>
+                                        <button type="button" class="btn btn-primary mt-5 mb-5" data-bs-toggle="modal" href="#ModalForm"> Créer un événement</button>
+                                <?php endif; ?> 
                                 <?php
                                     $requete = "SELECT 
-                                                    id,
-                                                    libelle_evenement,
-                                                    photo_couverture,
-                                                    photo,
-                                                    adresse,
-                                                    ville
+                                                    E.id,
+                                                    E.libelle_evenement,
+                                                    E.photo_couverture,
+                                                    E.id_categorie,
+                                                    E.adresse,
+                                                    E.ville,
+                                                    C.libelle as 'catLibelle'
                                                 FROM 
-                                                    evenements
+                                                    evenements E
+                                                    INNER JOIN categories_evenements C ON C.id = E.id_categorie
                                                 ORDER BY 
-                                                    date DESC";
+                                                    E.date DESC";
                                     $reqart = $bdd->prepare($requete);
                                     $reqart->execute();
                                     $resultat = $reqart->fetchAll();
@@ -47,7 +51,7 @@
                                     if (!empty($resultat)) {
                                         foreach ($resultat as $evenement) {
                                             $id_evenement = $evenement['id'];
-                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ?";
+                                            $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and id_user = $id_encours";
                                             $req_inscription = $bdd->prepare($requete_inscription);
                                             $req_inscription->execute([$id_evenement]);
                                             $nb_participants = $req_inscription->fetchColumn();
@@ -60,16 +64,14 @@
                                             <div class="col-md-6 col-sm-6 pe-2 ps-2">
                                                 <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
                                                     <div class="card-body position-relative h100 bg-image-cover bg-image-center" style="background-image: url(images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>); width: 500px; height: 100px;"></div>
-                                                    <div class="card-body d-block w-100 pl-10 pe-4 pb-4 pt-0 text-left position-relative">
-                                                        <figure class="avatar position-absolute w75 z-index-1" style="top:-40px; left: 15px; display: flex; justify-content: center; align-items: center;">
-                                                            <img src="images/uploads/evenements/photo/<?php echo $evenement['photo']; ?>" width="50px" height="50px" alt="<?php echo $evenement['libelle_evenement']; ?>" class="p-1 bg-white rounded-circle">
-                                                        </figure>
-                                                        <div class="clearfix"></div>
+                                                    <div class="card-body d-block w-100 pe-4 pb-4 pt-0 text-left position-relative">
                                                         <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?></h4>
                                                         <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0"><?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?></p>
                                                         <br>
                                                         <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $participants_text; ?></p>
-
+                                                        
+                                                        <span class="badge badge-secondary"><?php echo $evenement['catLibelle']; ?></span>
+                                                        
                                                         <span class="position-absolute right-15 top-0 d-flex align-items-center">
                                                             <?php if ($inscrit): ?>
                                                                 <a href="" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
@@ -92,7 +94,75 @@
             </div>            
         </div>
         <!-- main content -->
+            <div class="portfolio-modal modal fade" id="ModalForm" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="container"><img src="images/removedbg.png" width="80px" style="margin-right: 10px; position: absolute;">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <div class="d-flex align-items-center mt-3">
+                                            <h5 class="text-uppercase"><b>Créer un événement</b></h5>
+                                        </div>
+                                        <hr>
+                                        <form method="post" action="inc/actions/add_event.php" enctype="multipart/form-data">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Insérez un titre" required>
+                                                <label for="titre">Titre :</label>
+                                            </div>
 
+                                            <label for="image">Importez votre image :</label><br>
+                                                <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
+                                                <input class="form-control" type="file" name="image" id="image" accept="image/jpeg, image/png, image/gif" required><br>
+
+                                            <div class="form-floating mb-3">
+                                                <textarea class="form-control" id="contenu" name="contenu" placeholder="Insérez le contenu de l'événement" required></textarea>
+                                                <label for="contenu">Contenu :</label>
+                                            </div>
+
+                                             <label for="categorie">Catégorie :</label>
+                                                <select class="custom-select" name="categorie" id="categorie" required>
+                                                    <?php
+                                                    // Récupération des catégories d'événements depuis la base de données
+                                                    $requeteCategories = "SELECT * FROM categories_evenements";
+                                                    $resultatCategories = $bdd->query($requeteCategories);
+                                                                                
+                                                    // Boucle pour afficher les options du champ select
+                                                    while ($row = $resultatCategories->fetch(PDO::FETCH_ASSOC)) {
+                                                        echo '<option value="' . $row['id'] . '">' . $row['libelle'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select><br><br>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="ville" name="ville" placeholder="Insérez la ville de l'événement" required>
+                                                <label for="ville">Ville :</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Insérez l'adresse de l'événement" required>
+                                                <label for="adresse">Adresse :</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="date" class="form-control" id="date" name="date" required>
+                                                <label for="date">Date :</label>
+                                            </div>
+
+                                            <input type="hidden" name="id_encours" value="<?php echo $id_encours; ?>">
+
+                                            <button class="btn btn-success btn-xl text-uppercase" type="submit">PUBLIER</button>
+                                            <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
+                                                <i class="fas fa-xmark me-1"></i> x FERMER
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <!-- right chat -->
         <div class="right-chat nav-wrap mt-2 right-scroll-bar">
             <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
@@ -292,7 +362,71 @@
                 </div>
             </div>
         </div>
-                                    
+        
+        <div id="modal-popup-evenementOK" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Publication d'un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Félicitations, l'événement a bien été ajouté.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                      
+        <div id="modal-popup-evenementNonOK" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Publication d'un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Une erreur est survenue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+                      
+        <div id="modal-popup-existe" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Publication d'un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Le document existe déjà dans la base. Vous pouvez le renommer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>   
+          
+        <div id="modal-popup-format" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Publication d'un événement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 1.5rem;position: absolute;top: 0.8rem;right: 0.5rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Le format est incorrect.</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
         <script>
             const params = new URLSearchParams(window.location.search);
             const inscription = params.get('inscription');
@@ -301,6 +435,21 @@
                 $('#modal-popup-inscription').modal('show');
             } else if (inscription === 'erreur') {
                 $('#modal-popup-erreur').modal('show');
+            }
+        </script>     
+
+        <script>
+            const params2 = new URLSearchParams(window.location.search);
+            const addE = params.get('addE');
+                                    
+            if (addE === 'evenementOK') {
+                $('#modal-popup-evenementOK').modal('show');
+            } else if (addE === 'evenementNonOK') {
+                $('#modal-popup-evenementNonOK').modal('show');
+            } else if (addE === 'format') {
+                $('#modal-popup-format').modal('show');
+            } else if (addE === 'existe') {
+                $('#modal-popup-existe').modal('show');
             }
         </script>
 
@@ -330,35 +479,6 @@
         </div>
 
     </div> 
-
-    
-
-    <div class="custom-modal-popup-chat">
-        <div class="custom-modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
-            <div class="custom-modal-popup-header w-100 border-bottom">
-                <div class="card p-3 d-block border-0 d-block">
-                    <figure class="avatar mb-0 float-left me-2">
-                        <img src="https://via.placeholder.com/50x50.png" alt="image" class="w35 me-1">
-                    </figure>
-                    <h5 class="fw-700 text-primary font-xssss mt-1 mb-1">Hendrix Stamp</h5>
-                    <h4 class="text-grey-500 font-xsssss mt-0 mb-0"><span class="d-inline-block bg-success btn-round-xss m-0"></span> Available</h4>
-                    <a href="#" class="font-xssss position-absolute right-0 top-0 mt-3 me-4"><i class="ti-close text-grey-900 mt-2 d-inline-block"></i></a>
-                </div>
-            </div>
-            <div class="custom-modal-popup-body w-100 p-3 h-auto">
-                <div class="message"><div class="message-content font-xssss lh-24 fw-500">Hi, how can I help you?</div></div>
-                <div class="date-break font-xsssss lh-24 fw-500 text-grey-500 mt-2 mb-2">Mon 10:20am</div>
-                <div class="message self text-right mt-2"><div class="message-content font-xssss lh-24 fw-500">I want those files for you. I want you to send 1 PDF and 1 image file.</div></div>
-                <div class="snippet pt-3 ps-4 pb-2 pe-3 mt-2 bg-grey rounded-xl float-right" data-title=".dot-typing"><div class="stage"><div class="dot-typing"></div></div></div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="custom-modal-popup-footer w-100 border-top">
-                <div class="card p-3 d-block border-0 d-block">
-                    <div class="form-group icon-right-input style1-input mb-0"><input type="text" placeholder="Start typing.." class="form-control rounded-xl bg-greylight border-0 font-xssss fw-500 ps-3"><i class="feather-send text-grey-500 font-md"></i></div>
-                </div>
-            </div>
-        </div> 
-    </div>
 
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>

@@ -1,9 +1,9 @@
 <?php
-require_once "global.php";
+require_once "../global.php";
 
 connected_only();
 
 session_destroy();
-Header("Location: index.php");
+Header("Location: ../index.php");
 exit();
 ?>

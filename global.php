@@ -23,7 +23,7 @@ if (isset($_SESSION['user'])) {
     $prenomnom = $user['prenom'] . " " . $user['nom'];
     $nomprenom = $user['nom'] . " " . $user['prenom'];
     $id_encours = $user['id'];
-   // $grade_encours = $user['grade'];
+    $grade_encours = $user['id_grade'];
    // $region_encours = $user['region'];
 }
 
@@ -33,12 +33,7 @@ $today = date('Y-m-d');
 setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 
 
-/* Paramètres du site
 $req = $bdd->query("SELECT * FROM site_settings WHERE id = 1");
 $config = $req->fetch(PDO::FETCH_ASSOC);
 $url = $config['url'];
-$nomsite = $config['site_name'];
-$version = $config['version'];
-$logo = $config['logo'];
-*/
-?>
+$nomSite = $config['nom_site'];

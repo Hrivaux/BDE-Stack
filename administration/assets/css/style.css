@@ -10706,4 +10706,44 @@ div.code-toolbar > .toolbar span:hover {
 .tbmodal {
 text-align: center;
 margin-top: 50%;
+font-size: 25px;
+}
+/* Cacher le bouton "Afficher le mot de passe" par défaut */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Afficher le bouton "Afficher le mot de passe" lorsqu'on survole le champ de saisie */
+.input-group:hover .toggle-password {
+  display: inline-block;
+}
+
+/* Changer l'icône de l'oeil pour l'icône de l'oeil barré lorsqu'on masque le mot de passe */
+.input-group input[type="password"]:not(:focus) + .input-group-addon .fa-eye-slash {
+  display: none;
+}
+
+/* Afficher l'icône de l'oeil barré et masquer l'icône de l'oeil lorsqu'on masque le mot de passe */
+.input-group input[type="password"]:not(:focus) + .input-group-addon .fa-eye {
+  display: inline-block;
+}
+
+/* Afficher le mot de passe lorsqu'on clique sur le bouton "Afficher le mot de passe" */
+.input-group input[type="password"]:focus + .input-group-addon .fa-eye {
+  display: none;
+}
+
+/* Masquer le mot de passe lorsqu'on clique sur le bouton "Masquer le mot de passe" */
+.input-group input[type="text"]:focus + .input-group-addon .fa-eye-slash {
+  display: none;
+}
+
+/* Afficher le mot de passe lorsqu'on clique sur le bouton "Masquer le mot de passe" */
+.input-group input[type="text"]:focus + .input-group-addon .fa-eye {
+  display: inline-block;
 }

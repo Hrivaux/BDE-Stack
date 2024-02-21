@@ -1,7 +1,14 @@
 <?php
-include ("global.php");
+include ("../global.php");
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user']) || $grade_encours > 2) {
+    header('Location: ../index.php');
+    exit();
+}
 
 already_connected();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -29,7 +36,7 @@ already_connected();
 					<span class="r"></span>
 				</div>
 				<div class="card">
-					<form class="card-body text-center" action="inc/actions/login.php" method="post">
+					<form class="card-body text-center" action="<?php echo $url; ?>inc/actions/login.php" method="post">
 						<div class="mb-4">
 							<i class="feather icon-unlock auth-icon"></i>
 						</div>

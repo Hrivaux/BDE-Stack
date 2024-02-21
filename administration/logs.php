@@ -1,6 +1,37 @@
 <?php
 @session_start();
-require ('global.php');
+require('../global.php');
+
+
+// On détermine sur quelle page on se trouve
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+	$currentPage = (int) strip_tags($_GET['page']);
+} else {
+	$currentPage = 1;
+}
+
+// On détermine le nombre de logs total
+$logscompte = 'SELECT COUNT(*) AS nb FROM `logs`;';
+
+// On prépare la requête
+$query = $bdd->prepare($logscompte);
+
+// On exécute
+$query->execute();
+
+// On récupère le nombre de logs
+$result = $query->fetch();
+$nbLogs = (int) $result['nb'];
+
+// On détermine le nombre de logs par page
+$parPage = 10;
+
+// On calcule le nombre de pages total
+$pages = ceil($nbLogs / $parPage);
+
+// Calcul du 1er article de la page
+$premier = ($currentPage * $parPage) - $parPage;
+
 
 connected_only();
 
@@ -9,9 +40,8 @@ $pageactive = "LOGS";
 
 include('templates/meta.php');
 
-if ($grade_encours <= 2) 
-{
-    Header('location: accueil.php');
+if ($grade_encours < 2) {
+	Header('location: accueil.php');
 }
 ?>
 
@@ -54,8 +84,9 @@ if ($grade_encours <= 2)
 									<div class="card">
 										<div class="card-header">
 											<h5>
-												Liste des médecins
+												Historique des actions sur le site
 											</h5>
+											<p>Consulez la totalité de l'historique des actions "administratives" de votre site internet.</p>
 										</div>
 										<div class="card-block table-border-style">
 											<div class="table-responsive">
@@ -77,79 +108,91 @@ if ($grade_encours <= 2)
 														</tr>
 													</thead>
 													<tbody>
+														<?php $requete = ("SELECT 
+																		L.id	as 'log_id',
+																		L.type_log	as 'type',
+																		L.action	as 'action',
+																		L.date	as 'date',
+																		U.id,
+																		U.nom	as 'nom',
+																		U.prenom as 'prenom'
+																	FROM 
+																		logs 				L
+																	INNER JOIN utilisateurs U ON L.user_id = U.id
+																	ORDER BY L.id DESC LIMIT :premier, :parpage;");
 
-<?php
-$requete = ("SELECT 
-				L.id	as 'log_id',
-				L.type_log	as 'type',
-				L.action	as 'action',
-				L.date	as 'date',
-				U.id,
-				U.nom	as 'nom',
-				U.prenom as 'prenom'
-			FROM 
-				logs 				L
-			INNER JOIN utilisateurs U ON L.user_id = U.id
-			ORDER BY L.id DESC");
+														$reqlogs = $bdd->prepare($requete);
+														$reqlogs->bindValue(':premier', $premier, PDO::PARAM_INT);
+														$reqlogs->bindValue(':parpage', $parPage, PDO::PARAM_INT);
 
-$reqlogs = $bdd->prepare($requete);
-$reqlogs->execute();
+														$reqlogs->execute();
 
-$resultat = $reqlogs->fetchAll();
-if (!empty($resultat))
-{
-    foreach ($resultat as $logs)
-    {
-?>
+														$resultat = $reqlogs->fetchAll(PDO::FETCH_ASSOC);
+														if (!empty($resultat)) {
+															foreach ($resultat as $logs) { ?>
 
-<tr>
-	<td>
-		<h6 class="m-0">
-			<b><?php echo $logs['nom']." ".$logs['prenom']; ?></b>
-		</h6>
-		<td>
-			<h6 class="m-0">
-				<?php echo $logs['type']; ?>
-			</h6>
-		</td>
-		<td>
-			<h6 class="m-0">
-				<?php echo $logs['action']; ?>
-			</h6>
-		</td>
-		<td>
-			<h6 class="m-0">
-				<?php echo strftime('%d-%m-%Y',strtotime($logs['date'])); ?>
-			</h6>
-		</td>
-	</tr>
+																<tr>
+																	<td>
+																		<h6 class="m-0">
+																			<b><?php echo $logs['nom'] . " " . $logs['prenom']; ?></b>
+																		</h6>
+																	<td>
+																		<h6 class="m-0">
+																			<?php echo $logs['type']; ?>
+																		</h6>
+																	</td>
+																	<td>
+																		<h6 class="m-0">
+																			<?php echo $logs['action']; ?>
+																		</h6>
+																	</td>
+																	<td>
+																		<h6 class="m-0">
+																			<?php echo strftime('%d-%m-%Y', strtotime($logs['date'])); ?>
+																		</h6>
+																	</td>
+																</tr>
 
-    <?php
-}
-}
-else
-{
-    echo "Aucun médecin n'a été créé";
-}
-?>
+														<?php
+															}
+														} else {
+															echo "Aucune activité enregistrée actuellement.";
+														}
+														?>
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+													</tbody>
+												</table>
+												<nav aria-label="Page navigation example">
+													<ul class="pagination">
+														<li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+															<a class="page-link" href="<?php echo $url; ?>Administration/logs.php?page=<?= $currentPage - 1 ?>" aria-label="Précédent"><span aria-hidden="true">&laquo;</span><span class="sr-only">Précédent</span></a>
+														</li>
+														<?php for ($page = 1; $page <= $pages; $page++) : ?>
+															<li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+																<a class="page-link" href="<?php echo $url; ?>Administration/logs.php?page=<?= $page ?>"><?= $page ?></a>
+															</li>
+														<?php endfor ?>
+														<li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+															<a class="page-link" href="<?php echo $url; ?>Administration/logs.php?page=<?= $currentPage + 1 ?>" aria-label="Suivant"><span aria-hidden="true">&raquo;</span><span class="sr-only">Suivant</span></a>
+														</li>
+													</ul>
+												</nav>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<script src="assets/js/vendor-all.min.js"></script>
+	<script src="assets/js/vendor-all.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
+	<script src="assets/js/pcoded.min.js"></script>
 
 </body>
+
 </html>
