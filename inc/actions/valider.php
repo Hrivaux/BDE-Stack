@@ -40,7 +40,7 @@ if (isset($_GET['token'])) {
                 $mail->Port = 587;
 
                 $mail->setFrom('majtx69@gmail.com', 'BDE');
-                $mail->addAddress($admin['email']); // Email de l'administrateur
+                $mail->addAddress($admin['email']); 
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Nouvelle Inscription Confirmée';
