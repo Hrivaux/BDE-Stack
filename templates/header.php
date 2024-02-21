@@ -49,7 +49,7 @@ class Header
     public function __construct($bdd, $photo_profil)
     {
         $this->bdd = $bdd;
-        $this->photo_profil = $photo_profil; // Initialisation de la propriété $photo_profil
+        $this->photo_profil = $photo_profil; 
     }
 
     public function generateHeader()

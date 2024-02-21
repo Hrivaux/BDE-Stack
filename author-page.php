@@ -84,7 +84,8 @@ $nb_publicationducompte = $data['nb'];
                         <div class="col-xl-4 col-xxl-3 col-lg-4 pe-0">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-block p-4">
-                                    <h4 class="fw-700 mb-3 font-xsss text-grey-900">Description</h4>
+                                    <h4 class="fw-700 mb-3 font-xsss text-grey-900">Description<i class="feather-edit-2 text-grey-500 me-3 font-lg"></i></h4>
+                                    
                                     <p class="fw-500 text-grey-500 lh-24 font-xssss mb-0"><?php echo $profilconnecte['status']; ?></p>
                                 </div>
                                 <div class="card-body d-flex pt-0">
