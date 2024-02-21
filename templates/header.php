@@ -1,6 +1,41 @@
 <?php
 @session_start();
-require('global.php');
+
+@include ('./inc/DataBaseConnection.php.php');
+@include ('../inc/DataBaseConnection.php.php');
+@include ('./inc/functions.php');
+@include ('../inc/functions.php');
+@include ('../../inc/DataBaseConnection.php.php');
+@include ('../../inc/functions.php');
+require_once 'inc/DatabaseConnection.php';
+
+if (isset($_SESSION['user'])) {
+    $email = $_SESSION['user'];
+    
+    // Connexion à la base de données
+    $database = new DatabaseConnection('mysql-hubin.alwaysdata.net', 'hubin_bde', 'hubin', 'HubinSQL2022!');
+    $bdd = $database->connect();
+
+    $sql = $bdd->prepare("SELECT * FROM users WHERE email= :email LIMIT 1");
+    $sql->execute(array(':email' => $email));
+    $user = $sql->fetch(PDO::FETCH_ASSOC);
+
+    $prenomnom = $user['prenom'] . " " . $user['nom'];
+    $nomprenom = $user['nom'] . " " . $user['prenom'];
+    $id_encours = $user['id'];
+    $photo_profil = ''; // Initialisation de la variable à une chaîne vide par défaut
+
+if (isset($user['photo_profil'])) {
+    $photo_profil = $user['photo_profil'];
+}
+   // $grade_encours = $user['grade'];
+   // $region_encours = $user['region'];
+}
+
+// Date du jour en PHP
+$today = date('Y-m-d');
+
+setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
 
 connected_only();
 
@@ -9,10 +44,12 @@ include('templates/meta.php');
 class Header
 {
     private $bdd;
+    private $photo_profil; 
 
-    public function __construct($bdd)
+    public function __construct($bdd, $photo_profil)
     {
         $this->bdd = $bdd;
+        $this->photo_profil = $photo_profil; // Initialisation de la propriété $photo_profil
     }
 
     public function generateHeader()
@@ -144,7 +181,7 @@ class Header
                     
                 </div>
             </div>
-            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
+            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="<?php echo $this->photo_profil ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
         </div>
         <?php
     }
@@ -215,9 +252,9 @@ class Header
     }
 }
 
-$header = new Header($bdd);
+$header = new Header($bdd, $photo_profil);
 $header->generateHeader();
-?>
+
 
 
   
