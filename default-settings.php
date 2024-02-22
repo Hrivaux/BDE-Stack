@@ -23,26 +23,15 @@
                             <div class="card-body p-lg-5 p-4 w-100 border-0">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4 class="mb-4 font-xxl fw-700 mont-font mb-lg-5 mb-4 font-md-xs">Settings</h4>
-                                        <div class="nav-caption fw-600 font-xssss text-grey-500 mb-2">Genaral</div>
+                                        <h4 class="mb-4 font-xxl fw-700 mont-font mb-lg-5 mb-4 font-md-xs">Paramètres</h4>
+                                        <div class="nav-caption fw-600 font-xssss text-grey-500 mb-2">Profil</div>
                                         <ul class="list-inline mb-4">
-                                            <li class="list-inline-item d-block border-bottom me-0"><a href="account-information.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-primary-gradiant text-white feather-home font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Acount Information</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            <li class="list-inline-item d-block border-bottom me-0"><a href="contact-information.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-gold-gradiant text-white feather-map-pin font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Saved Address</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            <li class="list-inline-item d-block me-0"><a href="social.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-red-gradiant text-white feather-twitter font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Social Acount</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
+                                            <li class="list-inline-item d-block border-bottom me-0"><a href="author-page.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-primary-gradiant text-white feather-home font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Infos perso</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
                                         </ul>
 
-                                        <div class="nav-caption fw-600 font-xsss text-grey-500 mb-2">Acount</div>
+                                        <div class="nav-caption fw-600 font-xsss text-grey-500 mb-2">Mon compte</div>
                                         <ul class="list-inline mb-4">
-                                            <li class="list-inline-item d-block border-bottom me-0"><a href="payment.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-mini-gradiant text-white feather-credit-card font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">My Cards</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            <li class="list-inline-item d-block  me-0"><a href="password.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-blue-gradiant text-white feather-inbox font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Password</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            
-                                        </ul>
-
-                                        <div class="nav-caption fw-600 font-xsss text-grey-500 mb-2">Other</div>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item d-block border-bottom me-0"><a href="default-notification.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-gold-gradiant text-white feather-bell font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Notification</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            <li class="list-inline-item d-block border-bottom me-0"><a href="help-box.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-primary-gradiant text-white feather-help-circle font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Help</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
-                                            <li class="list-inline-item d-block me-0"><a href="#" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-red-gradiant text-white feather-lock font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Logout</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
+                                            <li class="list-inline-item d-block me-0"><a href="logout.php" class="pt-2 pb-2 d-flex align-items-center"><i class="btn-round-md bg-red-gradiant text-white feather-lock font-md me-3"></i> <h4 class="fw-600 font-xsss mb-0 mt-0">Déconnexion</h4><i class="ti-angle-right font-xsss text-grey-500 ms-auto mt-3"></i></a></li>
                                             
                                         </ul>
                                     </div>
