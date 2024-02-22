@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../vendor/autoload.php'; // Assurez-vous que ce chemin correspond à l'emplacement de l'autoload de Composer
+require '../../vendor/autoload.php'; 
 
 require_once('../DataBaseConnection.php');
 
