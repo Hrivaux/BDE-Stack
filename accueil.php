@@ -22,7 +22,7 @@ require_once 'inc/ImageUploader.php';
 
         <!-- navigation left -->
         <!-- main content -->
-        <div class="main-content right-chat-active">
+        <div class="main-content">
             
             <div class="middle-sidebar-bottom">
                 <div class="middle-sidebar-left">
@@ -593,7 +593,7 @@ require_once 'inc/ImageUploader.php';
                         <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center p-4">
-                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènement que tu as manqué</h4>
+                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènements que tu as manqués</h4>
                                     <a href="evenements.php" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
                                 </div>
                                 <?php
@@ -695,10 +695,7 @@ require_once 'inc/ImageUploader.php';
                         </div>
                     </div>
                 </div>
-                <!-- loader wrapper -->
-
-                <?php include('templates/friendlist.php'); ?>
-
+                
         
         <!-- right chat -->
         
