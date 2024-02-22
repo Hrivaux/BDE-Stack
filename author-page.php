@@ -123,33 +123,37 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="container"><img src="images/removedbg.png" width="80px" style="margin-right: 10px; position: absolute;">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="modal-body">
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h5 class="text-uppercase"><b>Modifier mes informations personnelles : </b></h5>
-                                        </div>
-                                        <hr>
-                                        <form method="post" action="inc/actions/add_event.php" enctype="multipart/form-data">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Insérez un titre" required>
-                                                <label for="titre">Description :</label>
-                                            </div>
-
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="contenu" name="contenu" placeholder="Insérez le contenu de l'événement" required></textarea>
-                                                <label for="contenu">Ecole :</label>
-                                            </div>
-
-                                             <label for="categorie">Ville :</label>
-                                                 <textarea class="form-control" id="contenu" name="contenu" placeholder="Insérez le contenu de l'événement" required></textarea>
-                                                 <br><br>
-
-                                            <button class="btn btn-success btn-xl text-uppercase" type="submit">PUBLIER</button>
-                                            <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
-                                                <i class="fas fa-xmark me-1"></i> x FERMER
-                                            </button>
-                                        </form>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <div class="d-flex align-items-center mt-3">
+                                <h5 class="text-uppercase"><b>Modifier mes informations personnelles : </b></h5>
+                            </div>
+                            <hr>
+                            <form method="post" action="inc/ModificationInformationUser.php" enctype="multipart/form-data">
+                                <input type="hidden" name="id_utilisateur" value="<?php echo $id_utilisateur; ?>"> <!-- Champ caché pour l'ID de l'utilisateur -->
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="status" name="status" placeholder="Insérez un titre" required>
+                                    <label for="status">Description :</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="ecole" name="ecole" placeholder="Insérez le contenu de l'événement" required></textarea>
+                                    <label for="ecole">Ecole :</label>
+                                </div>
+                                <label for="categorie">Ville :</label>
+                                <textarea class="form-control" id="ville" name="ville" placeholder="Insérez la ville" required></textarea>
+                                <br><br>
+                                <label for="photo_profil">Changez votre photo de profil :</label><br>
+                                <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
+                                <input class="form-control" type="file" name="photo_profil" id="photo_profil" accept="image/jpeg, image/png, image/gif" required><br>
+                                <label for="photo_couverture">Changez votre photo de couverture :</label><br>
+                                <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
+                                <input class="form-control" type="file" name="photo_couverture" id="photo_couverture" accept="image/jpeg, image/png, image/gif" required><br>
+                                <button class="btn btn-success btn-xl text-uppercase" type="submit">MODIFIER</button>
+                                <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-xmark me-1"></i> x FERMER
+                                </button>
+                            </form>
                                     </div>
                                 </div>
                             </div>
