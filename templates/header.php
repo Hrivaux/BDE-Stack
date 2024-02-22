@@ -179,7 +179,7 @@ class Header
             <?php 
             if (isset($_SESSION['user'])) {
             ?>
-            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="<?php echo $this->photo_profil; ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
+            <a href="author-page.php" class="p-0 ms-3 menu-icon"><img src="images/uploads/photo_profil/<?php echo $this->photo_profil; ?>" width="50px" height="50px" alt="user" class="w40 mt--1"></a>
             <?php 
             }
             ?>
