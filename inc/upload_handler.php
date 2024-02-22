@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bindParam(':chemin_image', $imagePath);
                 $stmt->execute();
 
-                header('Location: ../accueil.php');
+                header('Location: ../se-connecter.php');
                 exit; 
 
             } else {

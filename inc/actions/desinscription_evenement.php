@@ -10,9 +10,9 @@ if (isset($_GET['id_evenement'])) {
 
     $inscriptionManager = new DesinscriptionManager($bdd);
     $inscriptionManager->desinscriptionEvenement($id_evenement, $id_encours); 
-    header('Location: ../../evenements.php?desinscription=desinscritOk');
+    header('Location: ../../index.php?desinscription=desinscritOk');
     exit();
 } else {
-    header('Location: ../../evenements.php?desinscription=desinscritNonOk');
+    header('Location: ../../index.php?desinscription=desinscritNonOk');
     exit();
 }

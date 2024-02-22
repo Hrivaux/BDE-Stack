@@ -7,7 +7,6 @@ require_once 'inc/ImageUploader.php';
 
 <body class="color-theme-blue mont-font">
 
-    <div class="preloader"></div>
 
     
     <div class="main-wrapper">
@@ -22,7 +21,7 @@ require_once 'inc/ImageUploader.php';
 
         <!-- navigation left -->
         <!-- main content -->
-        <div class="main-content right-chat-active">
+        <div class="main-content">
             
             <div class="middle-sidebar-bottom">
                 <div class="middle-sidebar-left">
@@ -66,7 +65,9 @@ require_once 'inc/ImageUploader.php';
                            <form action="inc/upload_handler.php" method="post" enctype="multipart/form-data">
 
                             <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
-                            <?php echo $prenomnom ?>
+                            
+            <?php 
+            if (isset($_SESSION['user'])) { echo $prenomnom; } else { echo "Bienvenue"; } ?>
                                 
                                 <div class="card-body p-0">   
                                     
@@ -94,7 +95,8 @@ require_once 'inc/ImageUploader.php';
                             </div>
                             </form>
 
-    <!--                        <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
+    <!-- 
+                         <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                                 <div class="card-body p-0 d-flex">
                                     <figure class="avatar me-3"><img src="<?php echo $user['imageprofil'];?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1">Surfiya Zakir  <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">3 hour ago</span></h4>
@@ -529,7 +531,7 @@ require_once 'inc/ImageUploader.php';
                                     <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
                                 </div>
                             </div>
--->
+ #fin de la région -->
                                 <?php
 
 
@@ -593,8 +595,8 @@ require_once 'inc/ImageUploader.php';
                         <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center p-4">
-                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènement que tu as manqué</h4>
-                                    <a href="evenements.php" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
+                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènements que tu as manqués</h4>
+                                    <a href="publications.php" class="fw-600 ms-auto font-xssss text-primary">Tout voir </a>
                                 </div>
                                 <?php
                                     $requete = "SELECT 
@@ -644,7 +646,7 @@ require_once 'inc/ImageUploader.php';
                                     <?php else: ?>
                                     <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">S'INSCRIRE</a>
                                     <?php endif; ?>
-                                    <a href="evenements.php" class="p-2 lh-20 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl" style="white-space: nowrap;">Voir plus de détails</a>
+                                    <a href="publications.php" class="p-2 lh-20 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl" style="white-space: nowrap;">Voir plus de détails</a>
                                 </div>
 
 
@@ -695,10 +697,7 @@ require_once 'inc/ImageUploader.php';
                         </div>
                     </div>
                 </div>
-                <!-- loader wrapper -->
-
-                <?php include('templates/friendlist.php'); ?>
-
+                
         
         <!-- right chat -->
         

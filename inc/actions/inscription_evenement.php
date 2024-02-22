@@ -22,7 +22,7 @@ if (isset($_GET['id_evenement'])) {
             if ($resultat_verif['actif'] == 0) {
                 $inscriptionManager->miseAJourInscription($id_evenement, $id_encours);
             } else {
-                header('Location: ../../evenements.php?inscription=erreur');
+                header('Location: ../../index.php?inscription=erreur');
                 exit();
             }
         } else {
@@ -62,10 +62,10 @@ if (isset($_GET['id_evenement'])) {
             $mail->Body = 'Bonjour ' . $userDetails['prenom'] . ',<br><br>Vous êtes bien inscrit(e) à l\'événement <strong>' . $eventDetails['libelle_evenement'] . '</strong> qui se tiendra le ' . $dateEvenement . ' à ' . $eventDetails['adresse'] . ', ' . $eventDetails['ville'] . '.<br><br>Merci et à bientôt !';
 
             $mail->send();
-            header('Location: ../../evenements.php?inscription=inscrit');
+            header('Location: ../../index.php?inscription=inscrit');
             exit();
         } catch (Exception $e) {
-            header('Location: ../../evenements.php?inscription=mailerror');
+            header('Location: ../../index.php?inscription=mailerror');
             exit();
         }
 
