@@ -136,7 +136,7 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
     <select class="custom-select" name="grade" id="categorie" required>
         <?php
         // Récupération des catégories d'événements depuis la base de données
-        $requeteGrade = "SELECT id, libelle_grade FROM grades";
+        $requeteGrade = "SELECT id, libelle_grade FROM grades ";
         $resultatGrade = $bdd->query($requeteGrade);
                                                                                 
         // Boucle pour afficher les options du champ select
