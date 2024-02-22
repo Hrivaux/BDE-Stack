@@ -13,13 +13,13 @@ include ("templates/meta.php")?>
 
         <div class="nav-header bg-transparent shadow-none border-0">
             <div class="nav-top w-100">
-                <a href="index.php"><img src="images/removedbg.png" width="100px"/><span class="d-inline-block ls-3 fw-600 text-current font-xxl logo-text mt-2" style="color:#fff !important; font-family: Philosopher;">BDE de Sciences U. </span> </a>
+                <a href="se-connecter.php"><img src="images/removedbg.png" width="100px"/><span class="d-inline-block ls-3 fw-600 text-current font-xxl logo-text mt-2" style="color:#fff !important; font-family: Philosopher;">BDE de Sciences U. </span> </a>
                 <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                <a href="index.php" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                <a href="se-connecter.php" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                 <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                 <button class="nav-menu me-0 ms-2"></button>
 
-                <a href="index.php" class="header-btn d-none d-lg-block bg-dark fw-500 text-white font-xsss p-3 ms-auto w100 text-center lh-20 rounded">Connexion</a>
+                <a href="se-connecter.php" class="header-btn d-none d-lg-block bg-dark fw-500 text-white font-xsss p-3 ms-auto w100 text-center lh-20 rounded">Connexion</a>
                 <a href="register.php" class="header-btn d-none d-lg-block bg-current fw-500 text-white font-xsss p-3 ms-2 w100 text-center lh-20 rounded">Inscription</a>
             </div>
         </div>
@@ -63,7 +63,7 @@ include ("templates/meta.php")?>
                             </div>
                            
                             <button class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 " type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i>S'INSCRIRE</button>
-                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Tu as déjà un compte ?<a href="index.php" class="fw-700 ms-1">Connecte-toi</a></h6>
+                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Tu as déjà un compte ?<a href="se-connecter.php" class="fw-700 ms-1">Connecte-toi</a></h6>
                         </div>
                         </form>
                          

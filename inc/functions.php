@@ -3,7 +3,7 @@
 function connected_only()
 {
 	if(!isset($_SESSION['user'])) {
-		Header("Location: index.php");
+		Header("Location: se-connecter.php");
 		exit();
 	}
 }
@@ -11,7 +11,7 @@ function connected_only()
 function already_connected()
 {
 	if(isset($_SESSION['user'])) {
-		Header("Location: accueil.php");
+		Header("Location: index.php");
 		exit();
 	}
 }

@@ -19,16 +19,16 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             // Vérifier si le mot de passe correspond au hash stocké dans la base de données
             if (password_verify($password, $data['password'])) {
                 $_SESSION['user'] = $data['email'];
-                header('Location: accueil.php');
+                header('Location: index.php');
             } else {
-                header('Location: index.php?login_err=password');
+                header('Location: se-connecter.php?login_err=password');
             }
         } else {
-            header('Location: index.php?login_err=email');
+            header('Location: se-connecter.php?login_err=email');
         }
     } else {
-        header('Location: index.php?login_err=email');
+        header('Location: se-connecter.php?login_err=email');
     }
 } else {
-    header('Location: index.php?login_err=champs');
+    header('Location: se-connecter.php?login_err=champs');
 }

@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $modificationManager->modifierInformations($id_utilisateur, $nouveau_titre, $nouveau_contenu, $nouvelle_ville, $nouvelle_image_profil, $nouvelle_image_couverture);
 
     // Rediriger l'utilisateur vers une page de confirmation ou autre
-    header("Location: ../accueil.php");
+    header("Location: ../se-connecter.php");
     
     exit();
 }
