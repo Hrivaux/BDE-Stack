@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
-                                <div class="card-body position-relative h240 bg-image-cover bg-image-center"><img src="<?php echo $profilconnecte['photo_couverture']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></div>
+                                <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url('images/uploads/photo_couverture/rocky.jpg');"></div>
                                 <div class="card-body d-block pt-4 text-center position-relative">
                                     <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="<?php echo $profilconnecte['photo_profil']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 

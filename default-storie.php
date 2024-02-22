@@ -28,26 +28,89 @@
                                     </div>
                                     <a href="#" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>
                                 </div>
-                            </div><?php
-                                $requete = $bdd->prepare("SELECT * FROM users");
-                                $requete->execute();
-                                $allusers = $requete->fetchAll(); // Utilisez fetchAll() pour récupérer tous les utilisateurs
-                                ?>
-                                <div class="row ps-2 pe-1">
-                                    <?php foreach ($allusers as $user): ?>
-                                        <div class="col-md-3 col-xss-6 pe-2 ps-2">
-                                            <div class="card h300 d-block border-0 shadow-xss rounded-3 bg-gradiant-bottom overflow-hidden mb-3 bg-image-cover"><!--<img src="<?php //echo $user['photo_couverture']?>" style="height: 300px"></div>-->
-                                                <div class="card-body d-block w-100 position-absolute bottom-0 text-center">
-                                                    <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['pseudo']?></h4>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['nom'] . " " . $user['prenom'];?></h4>
-                                                    <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['pseudo']?></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>  
+                            </div>
+                            <?php
+// Préparez et exécutez la requête pour sélectionner tous les utilisateurs triés par grade
+$requete = $bdd->prepare("SELECT * FROM users ORDER BY id_grade");
+$requete->execute();
+$allusers = $requete->fetchAll(); // Utilisez fetchAll() pour récupérer tous les utilisateurs
+?>
+
+<div class="row ps-2 pe-1">
+    <div class="col-md-12">
+        <h2 style="text-align: center">Etudiant</h2>
+        <br>
+        <div class="row">
+            <?php foreach ($allusers as $user): ?>
+                <?php if ($user['id_grade'] == 1): ?>
+                    <div class="col-md-3 col-xss-6 pe-2 ps-2">
+                        <!-- Card pour les étudiants -->
+                        <div class="card h300 d-block border-0 shadow-xss rounded-3 bg-gradiant-bottom overflow-hidden mb-3 bg-image-cover" style="background-image: url('<?php echo $user['photo_couverture']?>');">
+                            <div class="card-body d-block w-100 position-absolute bottom-0 text-center">
+                                <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                <div class="clearfix"></div>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['pseudo']?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['nom'] . " " . $user['prenom'];?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['ville']?></h4>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="row ps-2 pe-1">
+    <div class="col-md-12">
+        <h2 style="text-align: center">Membre BDE</h2>
+        <br>
+        <div class="row">
+            <?php foreach ($allusers as $user): ?>
+                <?php if ($user['id_grade'] == 2): ?>
+                    <div class="col-md-3 col-xss-6 pe-2 ps-2">
+                        <!-- Card pour les étudiants -->
+                        <div class="card h300 d-block border-0 shadow-xss rounded-3 bg-gradiant-bottom overflow-hidden mb-3 bg-image-cover" style="background-image: url('<?php echo $user['photo_couverture']?>');">
+                            <div class="card-body d-block w-100 position-absolute bottom-0 text-center">
+                                <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                <div class="clearfix"></div>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['pseudo']?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['nom'] . " " . $user['prenom'];?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['ville']?></h4>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="row ps-2 pe-1">
+    <div class="col-md-12">
+        <h2 style="text-align: center">Administrateurs</h2>
+        <br>
+        <div class="row">
+            <?php foreach ($allusers as $user): ?>
+                <?php if ($user['id_grade'] == 3): ?>
+                    <div class="col-md-3 col-xss-6 pe-2 ps-2">
+                        <!-- Card pour les étudiants -->
+                        <div class="card h300 d-block border-0 shadow-xss rounded-3 bg-gradiant-bottom overflow-hidden mb-3 bg-image-cover" style="background-image: url('<?php echo $user['photo_couverture']?>');">
+                            <div class="card-body d-block w-100 position-absolute bottom-0 text-center">
+                                <figure class="avatar ms-auto me-auto mb-0 position-relative w50 z-index-1"><img src="<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                <div class="clearfix"></div>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['pseudo']?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['nom'] . " " . $user['prenom'];?></h4>
+                                <h4 class="fw-600 position-relative z-index-1 ls-3 font-xssss text-white mt-2 mb-1"><?php echo $user['ville']?></h4>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <!-- Répétez le même processus pour les membres BDE et les administrateurs -->
+    <!-- Assurez-vous de modifier les conditions if pour refléter les grades correspondants -->
+</div>
+
+
                     </div>
                 </div>
                  
