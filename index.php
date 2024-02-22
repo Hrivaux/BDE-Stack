@@ -112,14 +112,15 @@ require_once 'inc/ImageUploader.php';
                                                 $req_participants->execute([$id_evenement]);
                                                 $nb_participants = $req_participants->fetchColumn();
 
-                                                // Vérifier si l'utilisateur est inscrit à cet événement
+                                                if (isset($_SESSION['user'])) {
+                                                    // Vérifier si l'utilisateur est inscrit à cet événement
                                                 $requete_inscription_user = "SELECT COUNT(*) AS nb_inscriptions FROM inscriptions_evenements WHERE id_evenement = ? AND id_user = ? AND actif != 0";
                                                 $req_inscription_user = $bdd->prepare($requete_inscription_user);
                                                 $req_inscription_user->execute([$id_evenement, $id_encours]); // Assurez-vous de remplacer $id_utilisateur par l'id de l'utilisateur connecté
                                                 $nb_inscriptions_user = $req_inscription_user->fetchColumn();
 
                                                 $inscrit = $nb_inscriptions_user > 0;
-
+                                                }
                                                 // Déterminez le texte approprié en fonction du nombre de participants
                                                 $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
                                         ?>
