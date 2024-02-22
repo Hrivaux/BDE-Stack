@@ -39,4 +39,3 @@ $bdd = $database->connect();
 
 // Après avoir terminé, vous pouvez déconnecter la base de données
 // $database->disconnect();
-?>

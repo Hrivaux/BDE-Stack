@@ -30,7 +30,7 @@ include ("templates/meta.php")?>
                 <div class="card shadow-none border-0 ms-auto me-auto login-card">
                     <div class="card-body rounded-0 text-left">
                         <h2 class="fw-700 display1-size display2-md-size mb-4">S'inscrire</h2>                        
-                        <form action="inc/actions/inscription.php" method="post">
+                        <form action="inc/public/registrerhandler.php" method="post">
                             
                             <div class="form-group icon-input mb-3">
                                 <i class="font-sm ti-user text-grey-500 pe-0"></i>

@@ -57,13 +57,23 @@ require_once 'inc/ImageUploader.php';
                             <div class="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
                                 <div class="card-body d-flex align-items-center p-0">
                                     <h2 class="fw-700 mb-0 mt-0 font-md text-grey-900">Nos événements</h2>
-                                    <div class="search-form-2 ms-auto">
+                                       <div class="search-form-2 ms-auto">
                                         <i class="ti-search font-xss"></i>
                                         <input type="text" class="form-control text-grey-500 mb-0 bg-greylight theme-dark-bg border-0" placeholder="Rechercher">
                                     </div>
-                                    <a href="#" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>
+                                    <select id="categorieFilter" class="form-select ms-2 bg-greylight theme-dark-bg rounded-3">
+                                        <option value="" style="padding-right: 30px;">
+                                            Filtrer par ...
+                                        </option>
+                                        <?php
+                                        $sql_categories = "SELECT * FROM categories_evenements";
+                                        $requete_categories = $bdd->query($sql_categories);
+                                        while ($categorie = $requete_categories->fetch()) {
+                                            echo '<option value="' . $categorie['id'] . '">' . $categorie['libelle'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                            </div>
                             <div class="row ps-2 pe-1">
                             <?php if (isset($_SESSION['user']) && $grade_encours >= 2): ?>
                                         <button type="button" class="btn btn-primary mt-5 mb-5" data-bs-toggle="modal" href="#ModalForm"> Créer un événement</button>
@@ -72,15 +82,20 @@ require_once 'inc/ImageUploader.php';
                                     $requete = "SELECT 
                                                     E.id,
                                                     E.libelle_evenement,
+                                                    E.participants_max,
                                                     E.photo_couverture,
                                                     E.id_categorie,
                                                     E.adresse,
                                                     E.ville,
                                                     E.description,
+                                                    E.prix,
+                                                    E.date,
                                                     C.libelle as 'catLibelle'
                                                 FROM 
                                                     evenements E
                                                     INNER JOIN categories_evenements C ON C.id = E.id_categorie
+                                                WHERE 
+                                                    (SELECT COUNT(*) FROM inscriptions_evenements WHERE id_evenement = E.id AND actif = 1) < E.participants_max
                                                 ORDER BY 
                                                     E.date DESC";
                                     $reqart = $bdd->prepare($requete);
@@ -91,34 +106,46 @@ require_once 'inc/ImageUploader.php';
                                         foreach ($resultat as $evenement) {
                                                 $id_evenement = $evenement['id'];
                                                 
-                                                $requete_inscription = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? and actif = 1";
-                                                $req_inscription = $bdd->prepare($requete_inscription);
-                                                $req_inscription->execute([$id_evenement]);
-                                                $nb_participants = $req_inscription->fetchColumn();
-                                                
-                                                $inscrit = $nb_participants > 0;
-                                                
+                                                // Vérifier le nombre de participants
+                                                $requete_participants = "SELECT COUNT(*) AS nb_participants FROM inscriptions_evenements WHERE id_evenement = ? AND actif != 0";
+                                                $req_participants = $bdd->prepare($requete_participants);
+                                                $req_participants->execute([$id_evenement]);
+                                                $nb_participants = $req_participants->fetchColumn();
+
+                                                // Vérifier si l'utilisateur est inscrit à cet événement
+                                                $requete_inscription_user = "SELECT COUNT(*) AS nb_inscriptions FROM inscriptions_evenements WHERE id_evenement = ? AND id_user = ? AND actif != 0";
+                                                $req_inscription_user = $bdd->prepare($requete_inscription_user);
+                                                $req_inscription_user->execute([$id_evenement, $id_encours]); // Assurez-vous de remplacer $id_utilisateur par l'id de l'utilisateur connecté
+                                                $nb_inscriptions_user = $req_inscription_user->fetchColumn();
+
+                                                $inscrit = $nb_inscriptions_user > 0;
+
                                                 // Déterminez le texte approprié en fonction du nombre de participants
                                                 $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
-                                ?>
-                                            <div class="col-md-6 col-sm-6 pe-2 ps-2">
+                                        ?>
+                                            <div class="col-md-6 col-sm-6 pe-2 ps-2 evenement">
                                                  <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
                                                     <a data-bs-toggle="modal" href="#Modal_<?php echo $evenement['id']; ?>">
                                                <div class="card-body position-relative h100 bg-image-cover bg-image-center" style="background-image: url(images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>); width: 500px; height: 100px;"></div>
                                                     <div class="card-body d-block w-100 pe-4 pb-4 pt-0 text-left position-relative">
-                                                        <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?></h4>
-                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0"><?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?></p>
-                                                        <br>
-                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $participants_text; ?></p>
-                                                        
-                                                        <span class="badge badge-secondary"><?php echo $evenement['catLibelle']; ?></span>
+                                                        <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?> </h4>
+                                                        <span class="badge badge-secondary" style="float:right" data-categorie-id="<?php echo $evenement['id_categorie']; ?>">
+                                                            <?php echo $evenement['catLibelle']; ?>
+                                                        </span><p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0">
+                                                            <?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?>
+                                                            <br><br>
+                                                            <?php echo $participants_text." / ".$evenement['participants_max']." (max)"; ?> 
+                                                            <br><br>
+                                                            Prix :<?php echo $evenement['prix']."€";?>
+                                                            <br><br>
+                                                        </p>
                                                         
                                                         <?php if (isset($_SESSION['user'])) { ?>
                                                             <span class="position-absolute right-15 top-0 d-flex align-items-center" style="float:right">
                                                             <?php if ($inscrit): ?>
                                                                 <a href="inc/actions/desinscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
                                                             <?php else: ?>
-                                                                <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
+                                                                <a href="inc/class/eventRegistration.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
                                                             <?php endif; ?>
                                                         </span>
                                                         <?php } ?>
@@ -137,22 +164,29 @@ require_once 'inc/ImageUploader.php';
 
                                                                         <h2 class="text-uppercase"><?php echo $evenement['libelle_evenement']; ?></h2>
                                                                         <img class="img-fluid d-block mx-auto" src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?>" alt="<?php echo $evenement['libelle_evenement']; ?>" />
-                                                                        <ul class="list-inline">
-                                                                            <li>
-                                                                                <?php echo $participants_text; ?>
-                                                                            </li>
-                                                                        </ul>
                                                                         <p><?php echo $evenement['description']; ?></p>
                                                                         <ul class="list-inline">
                                                                             <li>
-                                                                                <strong>Catégorie :</strong>
+                                                                                <strong>Catégorie :</strong><br>
                                                                                 <?php echo $evenement['catLibelle']; ?>
                                                                             </li>
+                                                                            <br>
                                                                             <li>
-                                                                                <strong>Lieu :</strong>
+                                                                                <strong>Date :</strong><br>
+                                                                                <?php echo $evenement['date']; ?>
+                                                                            </li>
+                                                                            <br>
+                                                                            <li>
+                                                                                <strong>Lieu :</strong><br>
                                                                                 <?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?>
                                                                             </li>
+                                                                            <br>
+                                                                            <li>
+                                                                                <strong>Prix :</strong><br>
+                                                                                <?php echo $evenement['prix']."€"; ?>
+                                                                            </li>
                                                                         </ul>
+                                                                        <?php echo $participants_text." / ".$evenement['participants_max']." (max)"; ?> 
                                                                         <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal"
                                                                             type="button">
                                                                             <i class="fas fa-xmark me-1"></i>
@@ -170,19 +204,6 @@ require_once 'inc/ImageUploader.php';
                                     }
                                 ?>
                             </div>
-                           
-
-
-
-                            <div class="card w-100 text-center shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
-                                <div class="snippet mt-2 ms-auto me-auto" data-title=".dot-typing">
-                                    <div class="stage">
-                                        <div class="dot-typing"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                         </div> 
                     </div>
                 </div>
@@ -243,6 +264,16 @@ require_once 'inc/ImageUploader.php';
                                             <div class="form-floating mb-3">
                                                 <input type="date" class="form-control" id="date" name="date" required>
                                                 <label for="date">Date :</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="float" class="form-control" id="prix" name="prix" required>
+                                                <label for="prix">Prix :</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" id="nbmax" name="nbmax" required>
+                                                <label for="nbmax">Participants max :</label>
                                             </div>
 
                                             <?php if (isset($_SESSION['user'])) { ?>
@@ -420,6 +451,20 @@ require_once 'inc/ImageUploader.php';
                 } else if (addE === 'desinscritNonOk') {
                     $('#modal-popup-desinscritNonOk').modal('show');
                  }
+
+                 document.getElementById('categorieFilter').addEventListener('change', function() {
+                    var selectedCategoryId = this.value;
+                    var evenements = document.querySelectorAll('.evenement');
+
+                    evenements.forEach(function(evenement) {
+                        var categorieBadge = evenement.querySelector('.badge-secondary');
+                        if (selectedCategoryId === '' || categorieBadge.dataset.categorieId === selectedCategoryId) {
+                            evenement.style.display = 'block';
+                        } else {
+                            evenement.style.display = 'none';
+                        }
+                    });
+                });
         </script>
 
 
