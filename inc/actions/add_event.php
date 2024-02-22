@@ -62,27 +62,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $dossierDestination = "../../images/uploads/evenements/couverture/";
             $cheminDestination = $dossierDestination . $nomFichier;
             if (file_exists($cheminDestination)) {
-                header('Location: ../../evenements.php?addE=existe');
+                header('Location: ../../index.php?addE=existe');
                 exit();
             }
             if (move_uploaded_file($nomTemporaire, $cheminDestination)) {
                 if ($event->addEvent($id_encours, $titre, $categorie, $date, $nomFichier, $adresse, $ville, $description)) {
-                    header('Location: ../../evenements.php?addE=evenementOK');
+                    header('Location: ../../index.php?addE=evenementOK');
                     exit();
                 } else {
-                    header('Location: ../../evenements.php?addE=evenementNonOK1');
+                    header('Location: ../../index.php?addE=evenementNonOK1');
                     exit();
                 }
             } else {
-                header('Location: ../../evenements.php?addE=evenementNonOK2');
+                header('Location: ../../index.php?addE=evenementNonOK2');
                 exit();
             }
         } else {
-            header('Location: ../../evenements.php?addE=format');
+            header('Location: ../../index.php?addE=format');
             exit();
         }
     } else {
-        header('Location: ../../evenements.php?addE=champs');
+        header('Location: ../../index.php?addE=champs');
         exit();
     }
 }

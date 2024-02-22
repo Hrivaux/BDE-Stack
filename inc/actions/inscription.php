@@ -78,7 +78,7 @@ class InscriptionNow {
                     $mail->Body    = "Bonjour $nom $prenom, <br><br>Merci de cliquer sur le lien suivant pour confirmer votre inscription : <a href='http://localhost:3000/inc/actions/valider.php?token=$token'>Confirmer mon inscription</a>";
 
                     $mail->send();
-                    header('Location: ../../accueil.php?action=success');
+                    header('Location: ../../index.php?action=success');
                 } catch (Exception $e) {
                     // Gérer l'erreur d'envoi d'email
                     header('Location: ../../register.php?inscription=mailerror');
