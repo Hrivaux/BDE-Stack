@@ -131,7 +131,7 @@
                             </div>
                             <hr>
                             <form method="post" action="inc/ModificationInformationUser.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id_utilisateur" value="<?php echo $id_utilisateur; ?>"> <!-- Champ caché pour l'ID de l'utilisateur -->
+                                <input type="hidden" name="id" value="<?php echo $id_utilisateur; ?>"> <!-- Champ caché pour l'ID de l'utilisateur -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="status" name="status" placeholder="Insérez un titre" required>
                                     <label for="status">Description :</label>
