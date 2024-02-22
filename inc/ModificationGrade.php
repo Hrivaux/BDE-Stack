@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Appeler la méthode modifierGrade pour changer le grade de l'utilisateur
         if ($modifierGrade->modifierGrade($id_utilisateur, $nouveau_grade)) {
-            echo "Grade de l'utilisateur mis à jour avec succès";
+            header("Location: ../default-member.php");
         } else {
             echo "Erreur lors de la mise à jour du grade de l'utilisateur";
         }

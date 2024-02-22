@@ -22,11 +22,11 @@
                             <div class="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
                                 <div class="card-body d-flex align-items-center p-0">
                                     <h2 class="fw-700 mb-0 mt-0 font-md text-grey-900">Gestion Utilisateur</h2>
-                                    <div class="search-form-2 ms-auto">
+                                    <!--<div class="search-form-2 ms-auto">
                                         <i class="ti-search font-xss"></i>
                                         <input type="text" class="form-control text-grey-500 mb-0 bg-greylight theme-dark-bg border-0" placeholder="Search here.">
                                     </div>
-                                    <a href="#" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>
+                                    <a href="#" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>-->
                                 </div>
                             </div>
                             <?php
@@ -36,27 +36,32 @@ $requete->execute();
 $allusers = $requete->fetchAll(); 
 $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
 ?>
-<div class="row ps-2 pe-1" style="width: 1000px">
+    <div class="row ps-2 pe-1" style="width: 1000px">
     <div class="col-md-12">
         <h2 style="text-align: center">Etudiant</h2>
         <br>
         <div class="row">
             <?php foreach ($allusers as $user): ?>
                 <?php if ($user['id_grade'] == 1): ?>
-                            <div class="col-md-3 col-xss-6 pe-2 ps-2">
+                    <div class="col-md-3 col-xss-6 pe-2 ps-2">
                                     <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
                                         <div class="card-body d-block w-100 ps-3 pe-3 pb-4 text-center">
-                                            <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                                                                        <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="images/uploads/photo_profil/<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
                                             <div class="clearfix"></div>
                                             <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $user['nom'] . " " . $user['prenom']?></h4>
-                                            <?php if ($grade_encours == 3 || $grade_encours = 2): ?>
-                                            <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
+                                            <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $user['pseudo']?></p>
+                                            <?php if ($grade_encours == 3 || $grade_encours == 2): ?>
+                                          <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
 
                                         <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div> 
                 <?php endif; ?>
             <?php endforeach; ?>
+        </div>
+    </div>
+
     <div class="row ps-2 pe-1" style="width: 1000px">
     <div class="col-md-12">
         <h2 style="text-align: center">Membre BDE</h2>
@@ -67,7 +72,7 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
                     <div class="col-md-3 col-xss-6 pe-2 ps-2">
                                     <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
                                         <div class="card-body d-block w-100 ps-3 pe-3 pb-4 text-center">
-                                            <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="https://via.placeholder.com/50x50.png" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                                                                        <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="images/uploads/photo_profil/<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
                                             <div class="clearfix"></div>
                                             <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $user['nom'] . " " . $user['prenom']?></h4>
                                             <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $user['pseudo']?></p>
@@ -92,7 +97,7 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
                               <div class="col-md-3 col-xss-6 pe-2 ps-2">
                                     <div class="card d-block border-0 shadow-xss rounded-3 overflow-hidden mb-3">
                                         <div class="card-body d-block w-100 ps-3 pe-3 pb-4 text-center">
-                                            <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
+                                            <figure class="avatar ms-auto me-auto mb-0 position-relative w65 z-index-1"><img src="images/uploads/photo_profil/<?php echo $user['photo_profil']?>" alt="image" class="float-right p-0 bg-white rounded-circle w-100 shadow-xss"></figure>
                                             <div class="clearfix"></div>
                                             <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $user['nom'] . " " . $user['prenom']?></h4>
                                             <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $user['pseudo']?></p>
@@ -125,26 +130,33 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
                                 <h5 class="text-uppercase"><b>Modifier mes informations personnelles : </b></h5>
                             </div>
                             <hr>
-                            <form method="post" action="inc/ModificationGrade.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id" id="userId"> <!-- Input to store user ID -->
-                                <label for="grade">Nouveau grade :</label>
-                                <select class="custom-select" name="grade" id="categorie" required>
-                                    <?php
-                                    // Récupération des catégories d'événements depuis la base de données
-                                    $requeteGrade = "SELECT id, libelle_grade FROM grades";
-                                    $resultatGrade = $bdd->query($requeteGrade);
+                           <form method="post" action="inc/ModificationGrade.php" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="userId"> <!-- Input to store user ID -->
+    <label for="grade">Nouveau grade :</label>
+    <select class="custom-select" name="grade" id="categorie" required>
+        <?php
+        // Récupération des catégories d'événements depuis la base de données
+        $requeteGrade = "SELECT id, libelle_grade FROM grades";
+        $resultatGrade = $bdd->query($requeteGrade);
                                                                                 
-                                    // Boucle pour afficher les options du champ select
-                                    while ($row = $resultatGrade->fetch(PDO::FETCH_ASSOC)) {
-                                        echo '<option value="' . $row['id'] . '">' . $row['libelle_grade'] . '</option>';
-                                    }
-                                    ?>
-                                </select><br><br>
-                                <button class="btn btn-success btn-xl text-uppercase" type="submit">MODIFIER</button>
-                                <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
-                                    <i class="fas fa-xmark me-1"></i> x FERMER
-                                </button>
-                            </form>
+        // Boucle pour afficher les options du champ select
+        while ($row = $resultatGrade->fetch(PDO::FETCH_ASSOC)) {
+            // Vérifier si l'ID de la catégorie est égal à 2
+            if ($grade_encours == 2) {
+                echo '<option value="2" selected>BDE</option>';
+
+            } else {
+                echo '<option value="' . $row['id'] . '">' . $row['libelle_grade'] . '</option>';
+            }
+        }
+        ?>
+    </select><br><br>
+    <button class="btn btn-success btn-xl text-uppercase" type="submit">MODIFIER</button>
+    <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
+        <i class="fas fa-xmark me-1"></i> x FERMER
+    </button>
+</form>
+
                         </div>
                     </div>
                 </div>
