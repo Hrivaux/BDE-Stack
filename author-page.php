@@ -27,9 +27,9 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
-                                <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url('images/uploads/photo_couverture/rocky.jpg');"></div>
+                                <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url('images/uploads/photo_couverture/<?php echo $profilconnecte['photo_couverture']?>');"></div>
                                 <div class="card-body d-block pt-4 text-center position-relative">
-                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="<?php echo $profilconnecte['photo_profil']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+                                    <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="images/uploads/photo_profil/<?php echo $profilconnecte['photo_profil']?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
                                     <h4 class="font-xs ls-1 fw-700 text-grey-900"><?php echo $prenomnom ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $profilconnecte['pseudo']; ?></span></h4>
                                     
@@ -207,7 +207,7 @@ if ($reqev !== false) {?>
 
                                                       <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                                    <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
                                     <a href="#" class="ms-auto" id="dropdownMenu5" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                     <div class="dropdown-menu dropdown-menu-start p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu5">

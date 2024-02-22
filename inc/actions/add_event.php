@@ -16,19 +16,21 @@ class Event
         $this->bdd = $bdd;
     }
 
-    public function addEvent($id_encours, $titre, $categorie, $date, $image, $adresse, $ville, $description)
+    public function addEvent($id_encours, $titre, $nbmax, $categorie, $date, $image, $adresse, $ville, $description, $prix)
     {
-        $query = "INSERT INTO evenements (id_user, libelle_evenement, id_categorie, date, photo_couverture, adresse, ville, description) VALUES (:id_user, :libelle_evenement, :id_categorie, :date, :photo_couverture, :adresse, :ville, :description)";
+        $query = "INSERT INTO evenements (id_user, libelle_evenement, participants_max, id_categorie, date, photo_couverture, adresse, ville, description, prix) VALUES (:id_user, :libelle_evenement, :participants_max, :id_categorie, :date, :photo_couverture, :adresse, :ville, :description, :prix)";
 
         $stmt = $this->bdd->prepare($query);
         $stmt->bindParam(':id_user', $id_encours);
         $stmt->bindParam(':libelle_evenement', $titre);
+        $stmt->bindParam(':participants_max', $nbmax);
         $stmt->bindParam(':id_categorie', $categorie);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':photo_couverture', $image);
         $stmt->bindParam(':adresse', $adresse);
         $stmt->bindParam(':ville', $ville);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':prix', $prix);
 
         if ($stmt->execute()) {
             return true;
@@ -54,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ville = $_POST['ville'];
         $adresse = $_POST['adresse'];
         $date = $_POST['date'];
+        $prix = $_POST['prix'];
+        $nbmax = $_POST['nbmax'];
         $id_encours = $_POST['id_encours'];
 
 
@@ -66,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
             if (move_uploaded_file($nomTemporaire, $cheminDestination)) {
-                if ($event->addEvent($id_encours, $titre, $categorie, $date, $nomFichier, $adresse, $ville, $description)) {
+                if ($event->addEvent($id_encours, $titre, $nbmax, $categorie, $date, $nomFichier, $adresse, $ville, $description, $prix)) {
                     header('Location: ../../index.php?addE=evenementOK');
                     exit();
                 } else {
