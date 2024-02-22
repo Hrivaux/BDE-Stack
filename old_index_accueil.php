@@ -644,7 +644,7 @@ require_once 'inc/ImageUploader.php';
                                     <?php if ($inscrit): ?>
                                     <a href="#" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">✅ INSCRIT</a></a>
                                     <?php else: ?>
-                                    <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">S'INSCRIRE</a>
+                                    <a href="inc/class/eventRegistration.php?id_evenement=<?php echo $evenement['id']; ?>" class="p-2 lh-20 w100 bg-primary-gradiant me-2 text-white text-center font-xssss fw-600 ls-1 rounded-xl">S'INSCRIRE</a>
                                     <?php endif; ?>
                                     <a href="publications.php" class="p-2 lh-20 bg-grey text-grey-800 text-center font-xssss fw-600 ls-1 rounded-xl" style="white-space: nowrap;">Voir plus de détails</a>
                                 </div>

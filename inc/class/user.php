@@ -47,6 +47,12 @@ class User {
         }
     }
 
+    public function getUserDetails($id_user) {
+        $stmt = $this->bdd->prepare("SELECT email, prenom FROM users WHERE id = ?");
+        $stmt->execute([$id_user]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Vous pouvez ajouter ici d'autres méthodes liées à la gestion des utilisateurs
 }
 

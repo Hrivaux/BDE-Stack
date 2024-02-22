@@ -13,7 +13,7 @@ class Mailer {
     }
 
     public function sendConfirmationEmail($email, $nom, $prenom, $token) {
-        // Configuration et envoi de l'email de confirmation
+
         $this->setupMailer();
         $this->mailer->addAddress($email, $nom);
         $this->mailer->Subject = 'Confirmation d\'inscription';
@@ -30,6 +30,14 @@ class Mailer {
         $this->mailer->send();
     }
 
+    public function sendEventRegistrationEmail($email, $prenom, $nomEvenement, $dateEvenement, $adresse, $ville) {
+        $this->setupMailer();
+        $this->mailer->addAddress($email);
+        $this->mailer->Subject = "Inscription à l'événement confirmée";
+        $this->mailer->Body = "Bonjour $prenom, <br><br>Vous êtes bien inscrit(e) à l'événement <strong>$nomEvenement</strong> qui se tiendra le $dateEvenement à $adresse, $ville.<br><br>Nous sommes impatients de vous y voir !";
+        $this->mailer->send();
+    }
+
     private function setupMailer() {
         // Configuration commune de PHPMailer
         $this->mailer->isSMTP();
@@ -41,5 +49,6 @@ class Mailer {
         $this->mailer->Port = 587;
         $this->mailer->setFrom('majtx69@gmail.com', 'BDE'); // Remplacez par votre adresse e-mail réelle
         $this->mailer->isHTML(true);
+        $this->mailer->CharSet = 'UTF-8'; 
     }
 }

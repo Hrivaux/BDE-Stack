@@ -118,7 +118,7 @@ require_once 'inc/ImageUploader.php';
                                                             <?php if ($inscrit): ?>
                                                                 <a href="inc/actions/desinscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-green font-xsssss fw-700 ls-lg text-blue inscrit-btn">✅ INSCRIT</a>
                                                             <?php else: ?>
-                                                                <a href="inc/actions/inscription_evenement.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
+                                                                <a href="inc/class/eventRegistration.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
                                                             <?php endif; ?>
                                                         </span>
                                                         <?php } ?>
