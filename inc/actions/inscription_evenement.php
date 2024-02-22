@@ -7,6 +7,9 @@ require_once('../../global.php');
 require_once('../InscriptionManager.php');
 require '../../vendor/autoload.php';
 
+// Assurez-vous que la locale est bien réglée sur le français
+setlocale(LC_TIME, 'fr_FR.UTF-8');
+
 if (isset($_GET['id_evenement'])) {
     $id_evenement = $_GET['id_evenement'];
 
@@ -35,6 +38,10 @@ if (isset($_GET['id_evenement'])) {
         $userQuery->execute([$id_encours]);
         $userDetails = $userQuery->fetch();
 
+        // Formatage de la date en français
+        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+        $dateEvenement = $formatter->format(new DateTime($eventDetails['date']));
+
         // Envoyer l'email de confirmation
         $mail = new PHPMailer(true);
         try {
@@ -52,7 +59,7 @@ if (isset($_GET['id_evenement'])) {
 
             $mail->isHTML(true);
             $mail->Subject = 'Confirmation d\'inscription à l\'événement';
-            $mail->Body = 'Bonjour ' . $userDetails['prenom'] . ',<br><br>Vous êtes bien inscrit(e) à l\'événement <strong>' . $eventDetails['libelle_evenement'] . '</strong> qui se tiendra le ' . $eventDetails['date'] . ' à ' . $eventDetails['adresse'] . ', ' . $eventDetails['ville'] . '.<br><br>Merci et à bientôt !';
+            $mail->Body = 'Bonjour ' . $userDetails['prenom'] . ',<br><br>Vous êtes bien inscrit(e) à l\'événement <strong>' . $eventDetails['libelle_evenement'] . '</strong> qui se tiendra le ' . $dateEvenement . ' à ' . $eventDetails['adresse'] . ', ' . $eventDetails['ville'] . '.<br><br>Merci et à bientôt !';
 
             $mail->send();
             header('Location: ../../evenements.php?inscription=inscrit');
