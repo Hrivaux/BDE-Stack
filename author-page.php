@@ -59,21 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                             <!--                   
-                                <div class="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
-                                    <ul class="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4" id="pills-tab" role="tablist">
-                                        <li class="active list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block active" href="#navtabs1" data-toggle="tab">About</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs2" data-toggle="tab">Membership</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs3" data-toggle="tab">Discussion</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs4" data-toggle="tab">Video</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs3" data-toggle="tab">Group</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs1" data-toggle="tab">Events</a></li>
-                                        <li class="list-inline-item me-5"><a class="fw-700 me-sm-5 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs7" data-toggle="tab">Media</a></li>
-                                        <li class="list-inline-item ms-auto mt-3 me-4"><a href="#" class=""><i class="ti-more-alt text-grey-500 font-xs"></i></a></li>
-                                    </ul>
-                                </div>
--->
-
+                             
                             </div>
                         </div>
                         <div class="col-xl-4 col-xxl-3 col-lg-4 pe-0">
@@ -109,30 +95,51 @@
                                 <h5 class="text-uppercase"><b>Modifier mes informations personnelles : </b></h5>
                             </div>
                             <hr>
-                            <form method="post" action="inc/ModificationInformationUser.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?php echo $id_utilisateur; ?>">
+
+                              <form method="post" action="inc/ModificationInformationUser.php" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<?php echo $utilisateur['id']; ?>">
+
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="status" name="status" placeholder="Insérez un titre" required>
+                                    <input type="text" class="form-control" id="status" name="status" placeholder="Insérez un titre" value="<?php  echo $profilconnecte['status']; ?>">
                                     <label for="status">Description :</label>
                                 </div>
+
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" id="ecole" name="ecole" placeholder="Insérez le contenu de l'événement" required></textarea>
+                                    <textarea class="form-control" id="ecole" name="ecole" placeholder="Insérez le contenu de l'événement"><?php echo $profilconnecte['ecole']; ?></textarea>
                                     <label for="ecole">Ecole :</label>
                                 </div>
-                                <label for="categorie">Ville :</label>
-                                <textarea class="form-control" id="ville" name="ville" placeholder="Insérez la ville" required></textarea>
+
+                                <label for="ville">Ville :</label>
+                                <textarea class="form-control" id="ville" name="ville" placeholder="Insérez la ville"><?php echo $profilconnecte['ville']; ?></textarea>
                                 <br><br>
-                                <label for="photo_profil">Changez votre photo de profil :</label><br>
-                                <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
-                                <input class="form-control" type="file" name="photo_profil" id="photo_profil" accept="image/jpeg, image/png, image/gif" required><br>
-                                <label for="photo_couverture">Changez votre photo de couverture :</label><br>
-                                <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
-                                <input class="form-control" type="file" name="photo_couverture" id="photo_couverture" accept="image/jpeg, image/png, image/gif" required><br>
+
+                                <!-- Les images nécessitent une gestion différente -->
+                                <div>
+                                    <label for="photo_profil">Changez votre photo de profil :</label><br>
+                                    <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
+                                    <input class="form-control" type="file" name="photo_profil" id="photo_profil" accept="image/jpeg, image/png, image/gif"><br>
+                                    <!-- Afficher l'image actuelle si elle existe -->
+                                    <?php if (!empty($utilisateur['photo_profil'])): ?>
+                                        <img src="chemin/vers/les/images/<?php echo $utilisateur['photo_profil']; ?>" alt="Photo de profil" style="max-width: 100px;">
+                                    <?php endif; ?>
+                                </div>
+
+                                <div>
+                                    <label for="photo_couverture">Changez votre photo de couverture :</label><br>
+                                    <small style="color:red">Veillez à ce que le nom de l'image ne contienne pas d'accent ou de caractère spécial.</small>
+                                    <input class="form-control" type="file" name="photo_couverture" id="photo_couverture" accept="image/jpeg, image/png, image/gif"><br>
+                                    <!-- Afficher l'image de couverture actuelle si elle existe -->
+                                    <?php if (!empty($utilisateur['photo_couverture'])): ?>
+                                        <img src="chemin/vers/les/images/<?php echo $utilisateur['photo_couverture']; ?>" alt="Photo de couverture" style="max-width: 100px;">
+                                    <?php endif; ?>
+                                </div>
+
                                 <button class="btn btn-success btn-xl text-uppercase" type="submit">MODIFIER</button>
                                 <button class="btn btn-danger btn-xl text-uppercase" style="float:right" data-bs-dismiss="modal" type="button">
                                     <i class="fas fa-xmark me-1"></i> x FERMER
                                 </button>
                             </form>
+
                                     </div>
                                 </div>
                             </div>

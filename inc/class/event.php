@@ -23,7 +23,6 @@ class Event {
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Gérer l'erreur
             return false;
         }
     }
@@ -40,8 +39,7 @@ class Event {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Vous pouvez gérer l'erreur comme vous le souhaitez
-            // Par exemple, renvoyer false ou un tableau vide
+           
             return false;
         }
     }

@@ -16,17 +16,22 @@ if (isset($_GET['token'])) {
     try {
         $validatedUser = $user->validateToken($token);
 
-        // Envoi d'un e-mail aux administrateurs après la validation réussie
+        // Préparation de l'envoi de l'email
         $mailer = new PHPMailer(true);
         $mail = new Mailer($mailer);
 
-        // Sélectionner tous les administrateurs
+        // Récupération des emails des administrateurs
         $adminQuery = $bdd->prepare("SELECT email FROM users WHERE id_grade = 3");
         $adminQuery->execute();
-        $admins = $adminQuery->fetchAll(PDO::FETCH_ASSOC);
+        $admins = $adminQuery->fetchAll(PDO::FETCH_COLUMN, 0); // Récupérer uniquement la colonne 'email'
 
-        foreach ($admins as $admin) {
-            $mail->sendNotificationEmail($admin['email'], "Nouvelle Inscription Confirmée", "Une nouvelle inscription a été confirmée. Nom : {$validatedUser['nom']}, Email : {$validatedUser['email']}");
+        if ($admins) {
+            // Préparation du sujet et du corps de l'email
+            $subject = "Nouvelle Inscription Confirmée";
+            $body = "Une nouvelle inscription a été confirmée. Nom : {$validatedUser['nom']}, Email : {$validatedUser['email']}";
+
+            // Envoi de l'email aux administrateurs
+            $mail->sendMultipleEmails($admins, $subject, $body);
         }
 
         echo "Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter.";
@@ -36,6 +41,4 @@ if (isset($_GET['token'])) {
 } else {
     echo "Aucun token de validation fourni.";
 }
-
-
 ?>
