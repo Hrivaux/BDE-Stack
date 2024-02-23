@@ -77,7 +77,7 @@
     <?php endforeach; ?>
     
     <?php if (isset($_SESSION['user'])) : ?>
-        <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0" style="position:relative;margin-top: -1063px">
+        <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0" style="position:relative;margin-top: -2077px">
             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                 <div class="card-body d-flex align-items-center p-4">
                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènements que tu as manqués</h4>
