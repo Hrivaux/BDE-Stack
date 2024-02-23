@@ -128,7 +128,8 @@
                         $participants_text = $nb_participants > 1 ? "<b>$nb_participants</b> participants" : "<b>$nb_participants</b> participant";
                 ?>
                         <div class="" style="text-align: center;">
-                            <img src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?> " alt="" style="height: 150px; width: auto;"><br><br>
+                            <img src="images/uploads/evenements/couverture/<?php echo $evenement['photo_couverture']; ?> " alt="" style="height: 150px; width: auto;     max-width: 275px;
+"><br><br>
                             <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $participants_text; ?></p>
                             <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $evenement['libelle_evenement']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $evenement['adresse']; ?></span></h4>
                         </div>

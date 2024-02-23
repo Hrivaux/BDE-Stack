@@ -227,11 +227,8 @@ private function generateNotifications()
         ?>
         <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
             <?php
-            // Vérifiez si l'image provient d'un événement ou d'une publication
             if (isset($notifications['date'])) {
-                // Si c'est une publication, utilisez le chemin de l'image des publications
-                $image_path = "images/uploads/publication/";
-                // Affichez l'image avec le chemin approprié
+                $image_path = "images/uploads/publication/"; 
             ?>
             <img src="<?php echo $image_path . $notification['image']?>" alt="user" class="w40 position-absolute left-0">
             <?php } else { ?>
