@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require_once '../../vendor/autoload.php';
-require_once '../../global.php'; // Ce fichier initialise la session et récupère $id_encours
+require_once '../../global.php';
 require_once 'event.php';
 require_once '../InscriptionManager.php';
 require_once 'user.php';
