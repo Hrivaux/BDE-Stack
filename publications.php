@@ -38,35 +38,35 @@
                             </form>
                             <?php }?>    
 
-
-<div class="row">
     <?php
     $sql = "SELECT publication.*, users.pseudo, photo_profil FROM publication INNER JOIN users ON publication.id_users = users.id ORDER BY id DESC";
     $statement = $bdd->prepare($sql);
     $statement->execute();
     $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    // Si l'utilisateur est connecté, affichez la mise en page avec une largeur de 8 colonnes, sinon utilisez une largeur de 12 colonnes
-    foreach ($publications as $publication) :
     ?>
-        <div class="<?php echo isset($_SESSION['user']) ? 'col-xl-8 col-xxl-9 col-lg-8 ps-md-0' : 'col-xl-12 col-xxl-9 col-lg-8 ps-md-0'; ?>">
-            <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
+<div class="row">
+
+
+    
+   <div class="row">
+    <div class="<?php echo isset($_SESSION['user']) ? 'col-xl-8 col-xxl-9 col-lg-8 ps-md-0' : 'col-xl-12 col-xxl-9 col-lg-8 ps-md-0'; ?>">
+        <?php foreach ($publications as $publication) : ?>
+            <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                 <div class="card-body p-0 d-flex">
                     <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $publication['photo_profil']; ?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php
+                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php
                         $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
                         $date = date("d", strtotime($publication['date_publication'])) . ' ' . $mois[date("n", strtotime($publication['date_publication'])) - 1] . ' ' . date("Y", strtotime($publication['date_publication']));
                         echo $date;
-                        ?>
-                    </span>
-                        </h4>
-
+                        ?></span>
+                    </h4>
                     <?php if (isset($_SESSION['user'])) {
                         if ($grade_encours == 3) : ?>
-                        <a href="inc/DeletePubli.php?id_publication=<?php echo $publication['id']; ?>" class="ms-auto">
-                            <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
-                        </a>
-                    <?php endif; } ?>
+                            <a href="inc/DeletePubli.php?id_publication=<?php echo $publication['id']; ?>" class="ms-auto">
+                                <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
+                            </a>
+                    <?php endif;
+                    } ?>
                 </div>
                 <div class="card-body p-0 me-lg-5">
                     <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['libelle_publication']; ?></h4>
@@ -78,12 +78,11 @@
                     </div>
                 </div>
             </div>
-            <br>
-        </div>
-    <?php endforeach; ?>
-    
+        <?php endforeach; ?>
+    </div>
+
     <?php if (isset($_SESSION['user'])) : ?>
-        <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0" style="position:relative;margin-top: -2077px">
+        <div class="col-xl-4 col-xxl-3 col-lg-4 ps-md-0">
             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                 <div class="card-body d-flex align-items-center p-4">
                     <h4 class="fw-700 mb-0 font-xssss text-grey-900">Les évènements que tu as manqués</h4>
@@ -149,6 +148,7 @@
         </div>
     <?php endif; ?>
 </div>
+
 
         
         <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
