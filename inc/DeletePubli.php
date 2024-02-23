@@ -39,12 +39,12 @@ if (isset($_GET['id_publication'])) {
     if ($deletePubli->supprimerPublication($id_publication)) {
         if ($deletePubli->supprimerPublication($id_publication)) {
     echo "La publication a été supprimée avec succès.";
-    header("refresh:2;url=../publication.php");
+    header("refresh:2;url=../publications.php");
 }
 
     } else {
         echo "Erreur lors de la suppression de la publication.";
-        header("refresh:2;url=../publication.php");
+        header("refresh:2;url=../publications.php");
     }
 } else {
     echo "L'ID de la publication à supprimer n'a pas été spécifié.";

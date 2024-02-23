@@ -34,13 +34,10 @@
                                     <h4 class="font-xs ls-1 fw-700 text-grey-900"><?php echo $prenomnom ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo $profilconnecte['pseudo']; ?></span></h4>
                                     
                                     <div class="d-flex align-items-center pt-0 position-absolute left-15 top-10 mt-4 ms-2">
-                                        <h4 class="font-xsssss text-center d-none d-lg-block text-grey-500 fw-600 ms-2 me-2"><b class="text-grey-900 mb-1 font-sm fw-700 d-inline-block ls-3 text-dark"><?php echo $nb_publicationducompte; ?></b> Poste</h4>
-                                        <h4 class="font-xsssss text-center d-none d-lg-block text-grey-500 fw-600 ms-2 me-2"><b class="text-grey-900 mb-1 font-sm fw-700 d-inline-block ls-3 text-dark">2.1k </b> Followers</h4>
-                                        <h4 class="font-xsssss text-center d-none d-lg-block text-grey-500 fw-600 ms-2 me-2"><b class="text-grey-900 mb-1 font-sm fw-700 d-inline-block ls-3 text-dark">32k </b> Follow</h4>
+                                        <h4 class="font-xsssss text-center d-none d-lg-block text-grey-500 fw-600 ms-2 me-2"><b class="text-grey-900 mb-1 font-sm fw-700 d-inline-block ls-3 text-dark"><?php echo $nb_publicationducompte; ?></b> Publication<?php if ($nb_publicationducompte > 1) { echo "s"; } ?></h4>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
                                        <a type="button" class="btn btn-primary mt-5 mb-5" data-bs-toggle="modal" href="#ModalForm"> Modifier mon profil</a>
-                                        <a href="#" class="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"><i class="feather-mail font-md"></i></a>
                                         <a href="#" id="dropdownMenu8" class="d-none d-lg-block btn-round-lg ms-2 rounded-3 text-grey-700 bg-greylight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more font-md"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu8">
                                             <div class="card-body p-0 d-flex">
@@ -62,7 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                
+                             <!--                   
                                 <div class="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
                                     <ul class="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4" id="pills-tab" role="tablist">
                                         <li class="active list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block active" href="#navtabs1" data-toggle="tab">About</a></li>
@@ -75,6 +72,7 @@
                                         <li class="list-inline-item ms-auto mt-3 me-4"><a href="#" class=""><i class="ti-more-alt text-grey-500 font-xs"></i></a></li>
                                     </ul>
                                 </div>
+-->
 
                             </div>
                         </div>
@@ -100,25 +98,6 @@
                                 </div>
                             </div>
                            
-                            <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-                                <div class="card-body d-flex align-items-center  p-4">
-                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Photos</h4>
-                                    <a href="#" class="fw-600 ms-auto font-xssss text-primary">See all</a>
-                                </div>
-                                <div class="card-body d-block pt-0 pb-2">
-                                    <div class="row">
-                                        <div class="col-6 mb-2 pe-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                        <div class="col-6 mb-2 ps-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                        <div class="col-6 mb-2 pe-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                        <div class="col-6 mb-2 ps-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                        <div class="col-6 mb-2 pe-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                        <div class="col-6 mb-2 ps-1"><a href="https://via.placeholder.com/400x300.png" data-lightbox="roadtrip"><img src="https://via.placeholder.com/400x300.png" alt="image" class="img-fluid rounded-3 w-100"></a></div>
-                                    </div>
-                                </div>
-                                <div class="card-body d-block w-100 pt-0">
-                                    <a href="#" class="p-2 lh-28 w-100 d-block bg-grey text-grey-800 text-center font-xssss fw-700 rounded-xl"><i class="feather-external-link font-xss me-2"></i> More</a>
-                                </div>
-                            </div>
                             <div class="portfolio-modal modal fade" id="ModalForm" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -131,7 +110,7 @@
                             </div>
                             <hr>
                             <form method="post" action="inc/ModificationInformationUser.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?php echo $id_utilisateur; ?>"> <!-- Champ caché pour l'ID de l'utilisateur -->
+                                <input type="hidden" name="id" value="<?php echo $id_utilisateur; ?>">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="status" name="status" placeholder="Insérez un titre" required>
                                     <label for="status">Description :</label>
@@ -170,7 +149,7 @@
 
                             <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                 <div class="card-body d-flex align-items-center  p-4">
-                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
+                                    <h4 class="fw-700 mb-0 font-xssss text-grey-900">Événement</h4>
                                     <a href="#" class="fw-600 ms-auto font-xssss text-primary">Voir tout</a>
                                 </div>
                                 <?php
@@ -208,52 +187,21 @@ if ($reqev !== false) {?>
                                                       <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
                                     <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4>
-                                    <a href="#" class="ms-auto" id="dropdownMenu5" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-start p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu5">
-                                        <div class="card-body p-0 d-flex">
-                                            <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                        <div class="card-body p-0 d-flex mt-2">
-                                            <i class="feather-lock text-grey-500 me-3 font-lg"></i>
-                                            <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-4">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                        </div>
-                                    </div>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?></h4>
+                                     <?php if ($grade_encours >= 2 && $reqpubli['id_users'] == $id_encours) : ?>
+                                    <a href="inc/DeletePubli.php?id_publication=<?php echo $reqpubli['id']; ?>" class="ms-auto">
+                                        <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
+                                    </a>
+                                <?php endif; ?>
                                 </div>
                                 <div class="card-body p-0 mb-3 rounded-3 overflow-hidden">
                                     <h2 style="text-align: center;"><?php echo $reqpubli['libelle_publication']; ?></h2>
                                     <div class="row ps-2 pe-2">
-                                        <div class="col-sm-12 p-1"><img src="<?php echo ($reqpubli['chemin_image']); ?>" class="rounded-3 w-100" alt="image"></div>                                        
+                                        <div class="col-sm-12 p-1"><img src="images/uploads/publication/<?php echo $reqpubli['chemin_image']; ?>" class="rounded-3 w-100" alt="image"></div>                                        
                                     </div>
                                 </div>
                                 <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2"><?php echo $reqpubli['description']; ?><a href="#" class="fw-600 text-primary ms-2">See more</a></p>
-                                </div>
-                                <div class="card-body d-flex p-0">
-                                    <a href="#" class="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a>
-                                    <div class="emoji-wrap">
-                                        <ul class="emojis list-inline mb-0">
-                                            <li class="emoji list-inline-item"><i class="em em---1"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-angry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-anguished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-astonished"></i> </li>
-                                            <li class="emoji list-inline-item"><i class="em em-blush"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-clap"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-cry"></i></li>
-                                            <li class="emoji list-inline-item"><i class="em em-full_moon_with_face"></i></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">22 Comment</span></a>
-                                    <a href="#" class="ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-share-2 text-grey-900 text-dark btn-round-sm font-lg"></i><span class="d-none-xs">Share</span></a>
+                                    <p class="fw-500 text-black-500 lh-26 font-xssss w-100 mb-2"><?php echo $reqpubli['description']; ?></p>
                                 </div>
                             </div>
                             <?php
@@ -263,41 +211,6 @@ else
    echo "Vous n'avez pas de publication";
 }
 ?>
-                        
-        <div class="right-chat nav-wrap mt-2 right-scroll-bar">
-            <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
-
-                <!-- loader wrapper -->
-                <div class="preloader-wrap p-3">
-                    <div class="box shimmer">
-                        <div class="lines">
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                        </div>
-                    </div>
-                    <div class="box shimmer mb-3">
-                        <div class="lines">
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                        </div>
-                    </div>
-                    <div class="box shimmer">
-                        <div class="lines">
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                            <div class="line s_shimmer"></div>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-
-            </div>
         </div>
 
         

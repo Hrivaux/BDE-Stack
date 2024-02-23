@@ -21,7 +21,7 @@
                         <div class="col-xl-12">
                             <div class="card shadow-xss w-100 d-block d-flex border-0 p-4 mb-3">
                                 <div class="card-body d-flex align-items-center p-0">
-                                    <h2 class="fw-700 mb-0 mt-0 font-md text-grey-900">Gestion Utilisateur</h2>
+                                    <h2 class="fw-700 mb-0 mt-0 font-md text-grey-900">Liste de nos utilisateurs</h2>
                                     <!--<div class="search-form-2 ms-auto">
                                         <i class="ti-search font-xss"></i>
                                         <input type="text" class="form-control text-grey-500 mb-0 bg-greylight theme-dark-bg border-0" placeholder="Search here.">
@@ -38,7 +38,7 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
 ?>
     <div class="row ps-2 pe-1" style="width: 1000px">
     <div class="col-md-12">
-        <h2 style="text-align: center">Etudiant</h2>
+        <h2 style="text-align: center">Étudiants</h2>
         <br>
         <div class="row">
             <?php foreach ($allusers as $user): ?>
@@ -50,10 +50,11 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
                                             <div class="clearfix"></div>
                                             <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $user['nom'] . " " . $user['prenom']?></h4>
                                             <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $user['pseudo']?></p>
-                                            <?php if ($grade_encours == 3 || $grade_encours == 2): ?>
-                                          <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
-
-                                        <?php endif; ?>
+                                            <?php if (isset($_SESSION['user'])) { ?>
+                                                <?php if ($grade_encours == 3 || $grade_encours == 2): ?>
+                                                    <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
+                                                <?php endif; ?>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div> 
@@ -61,10 +62,10 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
             <?php endforeach; ?>
         </div>
     </div>
-
+<br>
     <div class="row ps-2 pe-1" style="width: 1000px">
     <div class="col-md-12">
-        <h2 style="text-align: center">Membre BDE</h2>
+        <h2 style="text-align: center">Membres BDE</h2>
         <br>
         <div class="row">
             <?php foreach ($allusers as $user): ?>
@@ -76,10 +77,11 @@ $id_utilisateur = isset($_GET['id']) ? $_GET['id'] : null;
                                             <div class="clearfix"></div>
                                             <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $user['nom'] . " " . $user['prenom']?></h4>
                                             <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-3"><?php echo $user['pseudo']?></p>
-                                            <?php if ($grade_encours == 3): ?>
-                                           <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
-
-                                        <?php endif; ?>
+                                            <?php if (isset($_SESSION['user'])) { ?>
+                                                <?php if ($grade_encours == 3): ?>
+                                                    <a data-bs-toggle="modal" data-id="<?php echo $user['id']; ?>" href="#ModalForm" id="openModal" type="button" class="mt-0 btn pt-2 pb-2 ps-3 pe-3 lh-24 ms-1 ls-3 d-inline-block rounded-xl bg-success font-xsssss fw-700 ls-lg text-white">Modifier Grade</a>
+                                                <?php endif; ?>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div> 
