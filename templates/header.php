@@ -187,56 +187,66 @@ class Header
         <?php
     }
 
-    private function generateNotifications()
-    {
-        $requeteEvenements = $this->bdd->prepare("SELECT libelle_evenement AS nom, description, date FROM evenements LIMIT 2");
-        $requetePublications = $this->bdd->prepare("SELECT libelle_publication AS nom, description, date_publication AS date FROM publication LIMIT 2");
+private function generateNotifications()
+{
+    $requeteEvenements = $this->bdd->prepare("SELECT libelle_evenement AS nom, description, date, photo_couverture as image FROM evenements LIMIT 2");
+    $requetePublications = $this->bdd->prepare("SELECT libelle_publication AS nom, description, date_publication AS date, chemin_image as image FROM publication LIMIT 2");
 
-        $requeteEvenements->execute();
-        $requetePublications->execute();
+    $requeteEvenements->execute();
+    $requetePublications->execute();
 
-        $notifications = [];
+    $notifications = [];
 
-        // Récupérer les événements
-        while ($evenement = $requeteEvenements->fetch()) {
-            $notifications[] = $evenement;
-        }
+    // Récupérer les événements
+    while ($evenement = $requeteEvenements->fetch()) {
+        $notifications[] = $evenement;
+    }
 
-        // Récupérer les publications
-        while ($publication = $requetePublications->fetch()) {
-            $notifications[] = $publication;
-        }
+    // Récupérer les publications
+    while ($publication = $requetePublications->fetch()) {
+        $notifications[] = $publication;
+    }
 
-        // Mélanger les notifications
-        shuffle($notifications);
+    // Mélanger les notifications
+    shuffle($notifications);
+    ?>
+
+    <a href="#" class="p-2 text-center ms-auto menu-icon" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="dot-count bg-warning"></span>
+        <i class="feather-bell font-xl text-current"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
+        <h4 class="fw-700 font-xss mb-4">Notification</h4>
+        
+        <?php
+        // Afficher les notifications
+        foreach ($notifications as $notification) {
+            $description = $notification['description'];
+            $words = explode(' ', $description);
+            $count = count($words);
         ?>
-
-        <a href="#" class="p-2 text-center ms-auto menu-icon" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="dot-count bg-warning"></span>
-            <i class="feather-bell font-xl text-current"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
-            <h4 class="fw-700 font-xss mb-4">Notification</h4>
-            
+        <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
             <?php
-            // Afficher les notifications
-            foreach ($notifications as $notification) {
-                $description = $notification['description'];
-                $words = explode(' ', $description);
-                $count = count($words);
+            // Vérifiez si l'image provient d'un événement ou d'une publication
+            if (isset($notifications['date'])) {
+                // Si c'est une publication, utilisez le chemin de l'image des publications
+                $image_path = "images/uploads/publication/";
+                // Affichez l'image avec le chemin approprié
             ?>
-            <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
-                <img src="https://via.placeholder.com/50x50.png" alt="user" class="w40 position-absolute left-0">
-                <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block"><?php echo $notification['nom']; ?><span class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 3 min</span></h5>
-                <h6 class="text-grey-500 fw-500 font-xssss lh-4">
-                    <?php 
-                    for ($i = 0; $i < $count; $i++) {
-                        echo $words[$i] . ' ';
-                        // Sauter à la ligne après chaque 10 mots
-                        if (($i + 1) % 10 === 0) {
-                            echo '<br>';
-                        }
+            <img src="<?php echo $image_path . $notification['image']?>" alt="user" class="w40 position-absolute left-0">
+            <?php } else { ?>
+            <img src="images/uploads/evenements/couverture/<?php echo $notification['image']?>" alt="user" class="w40 position-absolute left-0">
+            <?php } ?>
+            <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block"><?php echo $notification['nom']; ?></h5>
+            <h6 class="text-grey-500 fw-500 font-xssss lh-4">
+                <?php 
+                for ($i = 0; $i < $count; $i++) {
+                    echo $words[$i] . ' ';
+                    // Sauter à la ligne après chaque 10 mots
+                    if (($i + 1) % 10 === 0) {
+                        echo '<br>';
                     }
+                }
                     ?>
                 </h6>
             </div>
