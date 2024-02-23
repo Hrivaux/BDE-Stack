@@ -53,7 +53,13 @@
             <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                 <div class="card-body p-0 d-flex">
                     <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $publication['photo_profil']; ?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php echo strftime("%d %B %Y", strtotime($publication['date_publication'])); ?></span></h4>
+                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $publication['pseudo']; ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php
+                        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                        $date = date("d", strtotime($publication['date_publication'])) . ' ' . $mois[date("n", strtotime($publication['date_publication'])) - 1] . ' ' . date("Y", strtotime($publication['date_publication']));
+                        echo $date;
+                        ?>
+                    </span>
+                        </h4>
 
                     <?php if (isset($_SESSION['user'])) {
                         if ($grade_encours == 3) : ?>
