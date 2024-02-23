@@ -56,16 +56,26 @@ class Mailer {
         
     }
 
+   public function sendMultipleEmails($emails, $subject, $body) {
+    $this->setupMailer();
+    foreach ($emails as $email) {
+        $this->mailer->addAddress($email);
+    }
+    $this->mailer->Subject = $subject;
+    $this->mailer->Body = $body;
+    $this->mailer->send();
+    $this->mailer->clearAddresses();
+}
     private function setupMailer() {
         // Configuration commune de PHPMailer
         $this->mailer->isSMTP();
         $this->mailer->Host = 'smtp.gmail.com';
         $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = 'majtx69@gmail.com'; // Remplacez par votre adresse e-mail réelle
-        $this->mailer->Password = 'dzej lfqh ppff pjtn'; // Remplacez par votre mot de passe réel
+        $this->mailer->Username = 'majtx69@gmail.com'; 
+        $this->mailer->Password = 'dzej lfqh ppff pjtn';
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mailer->Port = 587;
-        $this->mailer->setFrom('majtx69@gmail.com', 'BDE'); // Remplacez par votre adresse e-mail réelle
+        $this->mailer->setFrom('majtx69@gmail.com', 'BDE');
         $this->mailer->isHTML(true);
         $this->mailer->CharSet = 'UTF-8'; 
     }

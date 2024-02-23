@@ -40,7 +40,6 @@ class User {
             $update = $this->bdd->prepare("UPDATE users SET validate = '1', token = '' WHERE token = ?");
             $update->execute([$token]);
 
-            // Retourner les informations de l'utilisateur validé pour un usage ultérieur (envoi d'e-mails, etc.)
             return $user;
         } else {
             throw new Exception("Token invalide ou compte déjà activé.");
@@ -60,7 +59,6 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Vous pouvez ajouter ici d'autres méthodes liées à la gestion des utilisateurs
 }
 
 ?>
