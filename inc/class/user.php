@@ -53,6 +53,13 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getUsersRegisteredForEvent($eventId) {
+        $sql = "SELECT u.email, u.prenom FROM inscriptions_evenements ie JOIN users u ON ie.id_user = u.id WHERE ie.id_evenement = ? AND ie.actif = b'1'";
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->execute([$eventId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Vous pouvez ajouter ici d'autres méthodes liées à la gestion des utilisateurs
 }
 

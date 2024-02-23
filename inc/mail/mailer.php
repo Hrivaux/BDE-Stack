@@ -22,7 +22,6 @@ class Mailer {
     }
 
     public function sendNotificationEmail($email, $subject, $body) {
-        // Configuration et envoi de l'email de notification aux administrateurs
         $this->setupMailer();
         $this->mailer->addAddress($email);
         $this->mailer->Subject = $subject;
@@ -39,11 +38,22 @@ class Mailer {
     }
 
     public function sendLowRegistrationNotification($email, $eventName, $eventDate) {
-        // Configuration et envoi de l'email de notification pour faible nombre d'inscriptions
+        $this->setupMailer();
         $this->mailer->addAddress($email);
         $this->mailer->Subject = "Peu d'inscriptions pour votre événement $eventName";
         $this->mailer->Body = "Bonjour, <br><br> Nous avons remarqué que votre événement \"$eventName\" prévu le $eventDate a moins de 5 inscriptions. Vous voudrez peut-être prendre des mesures pour promouvoir davantage votre événement. <br><br> Cordialement, <br> Votre équipe BDE";
         $this->mailer->send();
+    }
+
+    public function sendEventReminder($email, $prenom, $eventName, $eventDate, $adresse, $ville) {
+            $this->setupMailer();
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress($email, $prenom);
+            $this->mailer->isHTML(true);
+            $this->mailer->Subject = 'Rappel d\'événement : ' . $eventName;
+            $this->mailer->Body = "Bonjour $prenom, <br><br>Nous vous rappelons que vous êtes inscrit(e) à l'événement \"$eventName\" qui aura lieu demain, le $eventDate, à $adresse, $ville.<br><br>Nous avons hâte de vous y voir !";
+            $this->mailer->send();
+        
     }
 
     private function setupMailer() {
