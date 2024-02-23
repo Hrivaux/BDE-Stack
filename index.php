@@ -132,7 +132,8 @@ require_once 'inc/ImageUploader.php';
                                                         <h4 class="fw-700 font-xsss mt-3 mb-1"><?php echo $evenement['libelle_evenement']; ?> </h4>
                                                         <span class="badge badge-secondary" style="float:right" data-categorie-id="<?php echo $evenement['id_categorie']; ?>">
                                                             <?php echo $evenement['catLibelle']; ?>
-                                                        </span><p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0">
+                                                        </span>
+                                                        <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-0">
                                                             <?php echo $evenement['adresse']." <br> ".$evenement['ville']; ?>
                                                             <br><br>
                                                             <?php echo $participants_text." / ".$evenement['participants_max']." (max)"; ?> 
@@ -149,6 +150,11 @@ require_once 'inc/ImageUploader.php';
                                                                 <a href="inc/class/eventRegistration.php?id_evenement=<?php echo $evenement['id']; ?>" class="text-center p-2 lh-24 w100 ms-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white sinscrire-btn">S'INSCRIRE</a>
                                                             <?php endif; ?>
                                                         </span>
+                                                         <?php if ($grade_encours == 3) : ?>
+                        <a href="inc/DeleteEv.php?id_evenement=<?php echo $evenement['id']; ?>" class="ms-auto" >
+                            <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500" style="float:right"></i>
+                        </a>
+                    <?php endif; ?>
                                                         <?php } ?>
                                                     </div>
                                                 </div>
