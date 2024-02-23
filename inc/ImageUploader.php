@@ -53,17 +53,6 @@ class ImageUploader {
         }
     }
 
-    public function saveImageInfo($db, $description) {
-        if ($this->uploadOk) {
-            $stmt = $db->prepare("INSERT INTO publications (description, chemin_image, date_publication) VALUES (:description, :chemin, NOW())");
-            $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':chemin', $this->uploadedFilePath);
-            $stmt->execute();
-        } else {
-            echo "Erreur lors de l'enregistrement dans la base de données : " . $this->getErrorMsg();
-        }
-    }
-
     public function getErrorMsg() {
         return $this->errorMsg;
     }
