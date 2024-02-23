@@ -31,20 +31,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Enregistrer les informations dans la base de données si le téléchargement est réussi
             if ($uploadSuccess) {
+                if ($uploadSuccess) {
+                // Récupérer le chemin complet du fichier
                 $imagePath = $imageUploader->getUploadedFilePath();  
+
+                // Extraire le nom du fichier à partir du chemin complet
+                $fileName = basename($imagePath);
+
+                // Requête d'insertion avec seulement le nom du fichier
                 $sql = "INSERT INTO publication (libelle_publication, description, chemin_image, id_users) VALUES (:libelle_publication, :description, :chemin_image, $id_encours)";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':libelle_publication', $libellePublication);
                 $stmt->bindParam(':description', $description);
-                $stmt->bindParam(':chemin_image', $imagePath);
+                $stmt->bindParam(':chemin_image', $fileName);
                 $stmt->execute();
 
-                header('Location: ../se-connecter.php');
+                header('Location: ../publications.php');
                 exit; 
 
             } else {
                 echo "Erreur lors du téléchargement de l'image : " . $imageUploader->getErrorMsg();
             }
+        }
         } else {
             // Gérer l'erreur si l'utilisateur n'est pas connecté
             echo "Erreur : Vous devez être connecté pour effectuer cette action.";
@@ -56,4 +64,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Déconnexion de la base de données
     $database->disconnect();
 }
-?>
