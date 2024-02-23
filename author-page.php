@@ -184,48 +184,48 @@ if ($reqev !== false) {?>
                           
 
                       
-                                    <?php
-                                    $requete = $bdd->prepare("SELECT * FROM publication WHERE id_users  = $id_encours");
-                                    $requete->execute();
-                                    $reqpubli = $requete->fetch();
+<?php
+$requete = $bdd->prepare("SELECT * FROM publication WHERE id_users = ?");
+$requete->execute([$id_encours]);
 
-                                    if ($reqpubli !== false) { ?>
-
-                                                      <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
-                                <div class="card-body p-0 d-flex">
-                                    <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?>
-                                  
-                                    <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-                                        <?php
-                                            $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-                                            $date = date("d", strtotime($reqpubli['date_publication'])) . ' ' . $mois[date("n", strtotime($reqpubli['date_publication'])) - 1] . ' ' . date("Y", strtotime($reqpubli['date_publication']));
-                                            echo $date;
-                                        ?>         
-                                    </span></h4>
-                                     <?php if ($grade_encours >= 2 && $reqpubli['id_users'] == $id_encours) : ?>
-                                    <a href="inc/DeletePubli.php?id_publication=<?php echo $reqpubli['id']; ?>" class="ms-auto">
-                                        <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
-                                    </a>
-                                <?php endif; ?>
-                                </div>
-                                <div class="card-body p-0 mb-3 rounded-3 overflow-hidden">
-                                    <h2 style="text-align: center;"><?php echo $reqpubli['libelle_publication']; ?></h2>
-                                    <div class="row ps-2 pe-2">
-                                        <div class="col-sm-12 p-1"><img src="images/uploads/publication/<?php echo $reqpubli['chemin_image']; ?>" class="rounded-3 w-100" alt="image"></div>                                        
-                                    </div>
-                                </div>
-                                <div class="card-body p-0 me-lg-5">
-                                    <p class="fw-500 text-black-500 lh-26 font-xssss w-100 mb-2"><?php echo $reqpubli['description']; ?></p>
-                                </div>
-                            </div>
-                            <?php
-}
-else
-{
-   echo "Vous n'avez pas de publication";
+if ($requete->rowCount() > 0) { // Vérifie s'il y a des publications
+    while ($reqpubli = $requete->fetch()) { // Utilisation d'une boucle pour parcourir tous les résultats
+?>
+    <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
+        <div class="card-body p-0 d-flex">
+            <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
+            <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?>
+                <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+                    <?php
+                        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                        $date = date("d", strtotime($reqpubli['date_publication'])) . ' ' . $mois[date("n", strtotime($reqpubli['date_publication'])) - 1] . ' ' . date("Y", strtotime($reqpubli['date_publication']));
+                        echo $date;
+                    ?>         
+                </span>
+            </h4>
+            <?php if ($grade_encours >= 2 && $reqpubli['id_users'] == $id_encours) : ?>
+                <a href="inc/DeletePubli.php?id_publication=<?php echo $reqpubli['id']; ?>" class="ms-auto">
+                    <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
+                </a>
+            <?php endif; ?>
+        </div>
+        <div class="card-body p-0 mb-3 rounded-3 overflow-hidden">
+            <h2 style="text-align: center;"><?php echo $reqpubli['libelle_publication']; ?></h2>
+            <div class="row ps-2 pe-2">
+                <div class="col-sm-12 p-1"><img src="images/uploads/publication/<?php echo $reqpubli['chemin_image']; ?>" class="rounded-3 w-100" alt="image"></div>                                        
+            </div>
+        </div>
+        <div class="card-body p-0 me-lg-5">
+            <p class="fw-500 text-black-500 lh-26 font-xssss w-100 mb-2"><?php echo $reqpubli['description']; ?></p>
+        </div>
+    </div>
+<?php
+    }
+} else {
+    echo "Vous n'avez pas de publication";
 }
 ?>
+
         </div>
 
         
