@@ -182,12 +182,20 @@ if ($reqev !== false) {?>
                                     $requete->execute();
                                     $reqpubli = $requete->fetch();
 
-                                    if ($reqpubli !== false) {?>
+                                    if ($reqpubli !== false) { ?>
 
                                                       <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
                                     <figure class="avatar me-3"><img src="images/uploads/photo_profil/<?php echo $photo_profil?>" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?></h4>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1"><?php echo $profilconnecte['pseudo']; ?>
+                                  
+                                    <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+                                        <?php
+                                            $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                                            $date = date("d", strtotime($reqpubli['date_publication'])) . ' ' . $mois[date("n", strtotime($reqpubli['date_publication'])) - 1] . ' ' . date("Y", strtotime($reqpubli['date_publication']));
+                                            echo $date;
+                                        ?>         
+                                    </span></h4>
                                      <?php if ($grade_encours >= 2 && $reqpubli['id_users'] == $id_encours) : ?>
                                     <a href="inc/DeletePubli.php?id_publication=<?php echo $reqpubli['id']; ?>" class="ms-auto">
                                         <i class="feather-trash font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i>
