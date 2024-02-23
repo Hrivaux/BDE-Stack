@@ -53,7 +53,7 @@ class Header
         ?>
         <div class="nav-header bg-white shadow-xs border-0">
             <div class="nav-top">
-                <a href="index.php"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">BDE de Sciences U</span> </a>
+                <a href="index.php"><img src="images/removedbg.png" style="width: 65px"alt=""><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">BDE de Sciences U</span> </a>
                 <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                 <a href="default-video.php" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                 <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
